@@ -1,6 +1,6 @@
 package riichimod.mahjong.rules.scoring.minipoints;
 
-import riichimod.mahjong.Hand;
+import riichimod.mahjong.PlayerHand;
 import riichimod.mahjong.rules.shanten.parsing.TileGroup;
 import riichimod.mahjong.rules.scoring.RiichiScoringParameters;
 import riichimod.mahjong.rules.yakus.groupbased.Chiitoitsu;
@@ -9,11 +9,11 @@ import java.util.List;
 
 public class BaseMinipoints implements Fu
 {
-    private Hand hand;
+    private PlayerHand hand;
     private List<TileGroup> groups;
     private RiichiScoringParameters parameters;
 
-    public BaseMinipoints(Hand hand, List<TileGroup> groups, RiichiScoringParameters parameters)
+    public BaseMinipoints(PlayerHand hand, List<TileGroup> groups, RiichiScoringParameters parameters)
     {
         this.hand = hand;
         this.groups = groups;

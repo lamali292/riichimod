@@ -1,17 +1,16 @@
 package riichimod.mahjong.rules.yakus.tilebased;
 
-import riichimod.mahjong.Hand;
+import riichimod.mahjong.PlayerHand;
 import riichimod.mahjong.Tile;
 import riichimod.mahjong.rules.shanten.parsing.TileFamily;
 import riichimod.mahjong.rules.utils.MahjongTileKind;
 
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Chinitsu extends TileBasedYaku
 {
-    public Chinitsu(Hand hand)
+    public Chinitsu(PlayerHand hand)
     {
         super(hand);
     }

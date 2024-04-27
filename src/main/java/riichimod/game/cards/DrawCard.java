@@ -8,6 +8,10 @@ import riichimod.RiichiHelper;
 import riichimod.game.character.RiichiCharacter;
 import riichimod.select.SelectAction;
 import riichimod.game.util.CardStats;
+import riichimod.select.SelectableHolder;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class DrawCard extends BaseCard {
@@ -25,13 +29,16 @@ public class DrawCard extends BaseCard {
         setMagic(1);
     }
 
-        @Override
+    @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
+        List<SelectableHolder> holders = new ArrayList<>();
+        holders.add(RiichiHelper.hand);
+
         addToBot(new DrawCardAction(magicNumber));
 
         RiichiHelper.hand.draw(RiichiHelper.deck, magicNumber+RiichiHelper.drawPower);
         RiichiHelper.hand.calcYaku();
-        addToBot(new SelectAction(magicNumber+RiichiHelper.drawPower, RiichiHelper.hand, () -> {
+        addToBot(new SelectAction(magicNumber + RiichiHelper.drawPower, holders, () -> {
             RiichiHelper.hand.discardSelected();
         }));
     }

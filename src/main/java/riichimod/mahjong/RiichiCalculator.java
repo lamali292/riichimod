@@ -106,7 +106,7 @@ public class RiichiCalculator {
         return secondTile.getTileNumber()>=firstTile.getTileNumber() && secondTile.getTileNumber()<=firstTile.getTileNumber()+2;
     }
 
-    public static List<Yaku> getYakus(Hand hand, RiichiScoringParametersImpl scoringParameters){
+    public static List<Yaku> getYakus(PlayerHand hand, RiichiScoringParametersImpl scoringParameters){
         RiichiScoring scoring = new RiichiScoring();
         List<List<Yaku>> yakuss = new ArrayList<>();
         List<Integer> scores = new ArrayList<>();
@@ -115,7 +115,7 @@ public class RiichiCalculator {
         List<List<TileGroup>> handCombinations = calcTileGroups(hand.getUnmeldedTiles().stream().map(Tile::getTileKind).collect(Collectors.toList()));
         for (List<TileGroup> tileGroups : handCombinations) {
             tileGroups.addAll(melded);
-            List<Yaku> yakus = new ArrayList<>();
+            List<Yaku> yakus;
             if (isValidShape(tileGroups)){
                 yakus = scoring.getValidYakus(hand, tileGroups, scoringParameters);
                 if (!yakus.isEmpty()) {

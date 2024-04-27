@@ -1,13 +1,13 @@
 package riichimod.mahjong.rules.yakus.tilebased;
 
-import riichimod.mahjong.Hand;
+import riichimod.mahjong.PlayerHand;
 
 public class Tanyao extends TileBasedYaku
 {
     // should tanyao be open, default is true
     private boolean kuitan = true;
 
-    public Tanyao(Hand hand)
+    public Tanyao(PlayerHand hand)
     {
         super(hand);
     }

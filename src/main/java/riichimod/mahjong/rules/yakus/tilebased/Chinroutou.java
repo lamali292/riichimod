@@ -1,12 +1,12 @@
 package riichimod.mahjong.rules.yakus.tilebased;
 
-import riichimod.mahjong.Hand;
+import riichimod.mahjong.PlayerHand;
 import riichimod.mahjong.Tile;
 import riichimod.mahjong.rules.utils.MahjongTileKind;
 
 public class Chinroutou extends TileBasedYaku
 {
-    public Chinroutou(Hand hand)
+    public Chinroutou(PlayerHand hand)
     {
         super(hand);
     }

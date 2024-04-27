@@ -1,6 +1,6 @@
 package riichimod.mahjong.rules.yakus.groupbased;
 
-import riichimod.mahjong.Hand;
+import riichimod.mahjong.PlayerHand;
 import riichimod.mahjong.rules.shanten.parsing.TileGroup;
 
 import java.util.ArrayList;
@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Iipeikou extends GroupBasedYaku
 {
-    public Iipeikou(Hand hand, List<TileGroup> groups)
+    public Iipeikou(PlayerHand hand, List<TileGroup> groups)
     {
         super(hand, groups);
     }
@@ -36,10 +36,7 @@ public class Iipeikou extends GroupBasedYaku
                 }
             }
 
-            if (matchesFound.size() == 1)
-            {
-                return true;
-            }
+            return matchesFound.size() == 1;
         }
 
         return false;

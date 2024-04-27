@@ -1,6 +1,6 @@
 package riichimod.mahjong.rules.yakus.groupbased.yakuhai;
 
-import riichimod.mahjong.Hand;
+import riichimod.mahjong.PlayerHand;
 import riichimod.mahjong.rules.utils.MahjongTileKind;
 import riichimod.mahjong.rules.utils.Seat;
 import riichimod.mahjong.rules.shanten.parsing.TileGroup;
@@ -10,7 +10,7 @@ import java.util.List;
 
 public class TableWindYakuhai extends GroupBasedYaku
 {
-    public TableWindYakuhai(Hand hand, List<TileGroup> groups)
+    public TableWindYakuhai(PlayerHand hand, List<TileGroup> groups)
     {
         super(hand, groups);
     }

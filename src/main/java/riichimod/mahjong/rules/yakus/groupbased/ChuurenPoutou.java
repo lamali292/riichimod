@@ -1,6 +1,6 @@
 package riichimod.mahjong.rules.yakus.groupbased;
 
-import riichimod.mahjong.Hand;
+import riichimod.mahjong.PlayerHand;
 import riichimod.mahjong.rules.utils.MahjongTileKind;
 import riichimod.mahjong.rules.shanten.parsing.TileFamily;
 import riichimod.mahjong.rules.shanten.Pair;
@@ -13,7 +13,7 @@ import java.util.function.BiPredicate;
 
 public class ChuurenPoutou extends GroupBasedYaku
 {
-    public ChuurenPoutou(Hand hand, List<TileGroup> groups)
+    public ChuurenPoutou(PlayerHand hand, List<TileGroup> groups)
     {
         super(hand, groups);
     }
@@ -63,7 +63,7 @@ public class ChuurenPoutou extends GroupBasedYaku
 
     private List<Pair<Integer, Integer>> setAmountOfTilesRequiredPerNumber()
     {
-        ArrayList<Pair<Integer, Integer>> list = new ArrayList<Pair<Integer, Integer>>();
+        ArrayList<Pair<Integer, Integer>> list = new ArrayList<>();
         list.add(new Pair<>(0, 3));
         list.add(new Pair<>(1, 1));
         list.add(new Pair<>(2, 1));

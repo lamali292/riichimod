@@ -1,6 +1,6 @@
 package riichimod.mahjong.rules.shanten;
 
-import riichimod.mahjong.Hand;
+import riichimod.mahjong.PlayerHand;
 import riichimod.mahjong.Tile;
 import riichimod.mahjong.rules.shanten.parsing.HandConfigurationParser;
 import riichimod.mahjong.rules.shanten.parsing.MahjongTileKindComparator;
@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 
 public class WaitShapeEngine
 {
-    private Hand hand;
+    private final PlayerHand hand;
     private List<Tile> unmeldedTiles;
 
     private List<TileGroup> tileGroups;
@@ -27,7 +27,7 @@ public class WaitShapeEngine
     private List<MahjongTileKind> wait;
     private List<MahjongTileKind> improvingTiles;
 
-    public WaitShapeEngine(Hand hand)
+    public WaitShapeEngine(PlayerHand hand)
     {
         this.hand = hand;
 
@@ -36,7 +36,7 @@ public class WaitShapeEngine
 
     public WaitShapeEngine(List<Tile> tileList)
     {
-        hand = new Hand();
+        hand = new PlayerHand();
         hand.setTiles(tileList);
 
         init();

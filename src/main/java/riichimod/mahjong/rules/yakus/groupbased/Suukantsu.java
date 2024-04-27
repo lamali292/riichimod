@@ -1,13 +1,13 @@
 package riichimod.mahjong.rules.yakus.groupbased;
 
-import riichimod.mahjong.Hand;
+import riichimod.mahjong.PlayerHand;
 import riichimod.mahjong.rules.shanten.parsing.TileGroup;
 
 import java.util.List;
 
 public class Suukantsu extends GroupBasedYaku
 {
-    public Suukantsu(Hand hand, List<TileGroup> groups)
+    public Suukantsu(PlayerHand hand, List<TileGroup> groups)
     {
         super(hand, groups);
     }

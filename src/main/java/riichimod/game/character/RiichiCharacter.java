@@ -116,12 +116,16 @@ public class RiichiCharacter extends CustomPlayer {
         //If you want multiple of the same card, you have to add it multiple times.
         for (int i = 0; i< 6; i++){
             retVal.add(DrawCard.ID);
-            retVal.add(MoreDrawCard.ID);
+
         }
-        retVal.add(PonCard.ID);
-        retVal.add(ChiiCard.ID);
-        retVal.add(KanCard.ID);
         retVal.add(StealCard.ID);
+        retVal.add(StealCard.ID);
+        retVal.add(StealCard.ID);
+        retVal.add(StealCard.ID);
+        //retVal.add(PonCard.ID);
+        //retVal.add(ChiiCard.ID);
+        //retVal.add(KanCard.ID);
+        //retVal.add(MoreDrawCard.ID);
 
         /*
         retVal.add(StrikeCard.ID);

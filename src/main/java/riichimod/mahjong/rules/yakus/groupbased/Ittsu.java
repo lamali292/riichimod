@@ -1,6 +1,6 @@
 package riichimod.mahjong.rules.yakus.groupbased;
 
-import riichimod.mahjong.Hand;
+import riichimod.mahjong.PlayerHand;
 import riichimod.mahjong.rules.utils.MahjongTileKind;
 import riichimod.mahjong.rules.shanten.parsing.TileFamily;
 import riichimod.mahjong.rules.shanten.parsing.TileGroup;
@@ -10,7 +10,7 @@ import java.util.List;
 
 public class Ittsu extends GroupBasedYaku
 {
-    public Ittsu(Hand hand, List<TileGroup> groups)
+    public Ittsu(PlayerHand hand, List<TileGroup> groups)
     {
         super(hand, groups);
     }
@@ -18,9 +18,9 @@ public class Ittsu extends GroupBasedYaku
     @Override
     public boolean isValid()
     {
-        ArrayList<TileGroup> charactersRunsCatalog = new ArrayList<TileGroup>();
-        ArrayList<TileGroup> circlesRunsCatalog = new ArrayList<TileGroup>();
-        ArrayList<TileGroup> bamboosRunsCatalog = new ArrayList<TileGroup>();
+        ArrayList<TileGroup> charactersRunsCatalog = new ArrayList<>();
+        ArrayList<TileGroup> circlesRunsCatalog = new ArrayList<>();
+        ArrayList<TileGroup> bamboosRunsCatalog = new ArrayList<>();
 
         for (TileGroup group : groups)
         {
@@ -55,12 +55,7 @@ public class Ittsu extends GroupBasedYaku
             return true;
         }
 
-        if (bamboosContainIttsu(bamboosRunsCatalog))
-        {
-            return true;
-        }
-
-        return false;
+        return bamboosContainIttsu(bamboosRunsCatalog);
     }
 
     private boolean charactersContainIttsu(List<TileGroup> charactersRunsCatalog)

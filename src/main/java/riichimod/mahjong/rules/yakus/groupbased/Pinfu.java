@@ -1,6 +1,6 @@
 package riichimod.mahjong.rules.yakus.groupbased;
 
-import riichimod.mahjong.Hand;
+import riichimod.mahjong.PlayerHand;
 import riichimod.mahjong.rules.utils.Seat;
 import riichimod.mahjong.rules.utils.MahjongTileKind;
 import riichimod.mahjong.rules.shanten.parsing.TileGroup;
@@ -10,7 +10,7 @@ import java.util.List;
 
 public class Pinfu extends GroupBasedYaku
 {
-    public Pinfu(Hand hand, List<TileGroup> groups)
+    public Pinfu(PlayerHand hand, List<TileGroup> groups)
     {
         super(hand, groups);
     }
@@ -18,7 +18,7 @@ public class Pinfu extends GroupBasedYaku
     @Override
     public boolean isValid()
     {
-        ArrayList<TileGroup> groupsThatContainTheWinningTile = new ArrayList<TileGroup>();
+        ArrayList<TileGroup> groupsThatContainTheWinningTile = new ArrayList<>();
         MahjongTileKind winningTile = hand.getWinningTile();
         TileGroup pair = null;
 
@@ -53,7 +53,7 @@ public class Pinfu extends GroupBasedYaku
             groupIndices.remove(Integer.valueOf(winningTile.getIndex()));
             if (groupIndices.size() == 2)
             {
-                winningTileIsRyanmen |= new TileGroup(groupIndices.get(0).intValue(), groupIndices.get(1).intValue()).isDoubleSidedBlock();
+                winningTileIsRyanmen |= new TileGroup(groupIndices.get(0), groupIndices.get(1)).isDoubleSidedBlock();
             }
         }
         if (!winningTileIsRyanmen)

@@ -1,13 +1,13 @@
 package riichimod.mahjong.rules.yakus.tilebased;
 
-import riichimod.mahjong.Hand;
+import riichimod.mahjong.PlayerHand;
 import riichimod.mahjong.rules.yakus.Yaku;
 
 public abstract class TileBasedYaku implements Yaku
 {
-    protected Hand hand;
+    protected PlayerHand hand;
 
-    public TileBasedYaku(Hand hand)
+    public TileBasedYaku(PlayerHand hand)
     {
         this.hand = hand;
     }

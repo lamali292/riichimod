@@ -10,12 +10,12 @@ import riichimod.mahjong.rules.shanten.parsing.TileGroup;
 import java.util.stream.Collectors;
 
 public class MeldSlot extends Slot {
-    public MeldSlot(Hand hand, int id, Vector2 pos, BobEffect bob) {
+    public MeldSlot(PlayerHand hand, int id, Vector2 pos, BobEffect bob) {
         super(hand, id, pos, bob, null);
     }
 
     public void render(SpriteBatch sb) {
-        TileGroup tileGroup = hand.melds.get(id);
+        TileGroup tileGroup = ((PlayerHand)hand).melds.get(id);
         Texture tex;
         if (tileGroup.getSize() == 4) {
             tex = RiichiDeck.meldSlot4;

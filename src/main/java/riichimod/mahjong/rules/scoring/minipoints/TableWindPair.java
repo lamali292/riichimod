@@ -1,6 +1,6 @@
 package riichimod.mahjong.rules.scoring.minipoints;
 
-import riichimod.mahjong.Hand;
+import riichimod.mahjong.PlayerHand;
 import riichimod.mahjong.rules.utils.MahjongTileKind;
 import riichimod.mahjong.rules.shanten.parsing.TileGroup;
 import riichimod.mahjong.rules.utils.Seat;
@@ -9,10 +9,10 @@ import java.util.List;
 
 public class TableWindPair implements Fu
 {
-    private Hand hand;
+    private PlayerHand hand;
     private List<TileGroup> groups;
 
-    public TableWindPair(Hand hand, List<TileGroup> groups)
+    public TableWindPair(PlayerHand hand, List<TileGroup> groups)
     {
         this.hand = hand;
         this.groups = groups;

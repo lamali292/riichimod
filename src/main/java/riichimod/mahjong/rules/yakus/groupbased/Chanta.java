@@ -1,6 +1,6 @@
 package riichimod.mahjong.rules.yakus.groupbased;
 
-import riichimod.mahjong.Hand;
+import riichimod.mahjong.PlayerHand;
 import riichimod.mahjong.rules.utils.MahjongTileKind;
 import riichimod.mahjong.rules.shanten.parsing.TileGroup;
 
@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Chanta extends GroupBasedYaku
 {
-    public Chanta(Hand hand, List<TileGroup> groups)
+    public Chanta(PlayerHand hand, List<TileGroup> groups)
     {
         super(hand, groups);
     }

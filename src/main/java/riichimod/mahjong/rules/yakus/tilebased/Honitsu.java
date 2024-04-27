@@ -1,6 +1,6 @@
 package riichimod.mahjong.rules.yakus.tilebased;
 
-import riichimod.mahjong.Hand;
+import riichimod.mahjong.PlayerHand;
 import riichimod.mahjong.Tile;
 import riichimod.mahjong.rules.shanten.parsing.TileFamily;
 import riichimod.mahjong.rules.utils.MahjongTileKind;
@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 
 public class Honitsu extends TileBasedYaku
 {
-    public Honitsu(Hand hand)
+    public Honitsu(PlayerHand hand)
     {
         super(hand);
     }

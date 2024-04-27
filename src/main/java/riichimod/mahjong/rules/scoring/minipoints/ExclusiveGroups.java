@@ -2,7 +2,7 @@ package riichimod.mahjong.rules.scoring.minipoints;
 
 import java.util.List;
 
-import riichimod.mahjong.Hand;
+import riichimod.mahjong.PlayerHand;
 import riichimod.mahjong.rules.utils.MahjongTileKind;
 import riichimod.mahjong.rules.utils.TileGroupUtils;
 import riichimod.mahjong.rules.shanten.parsing.TileGroup;
@@ -13,10 +13,10 @@ import riichimod.mahjong.rules.shanten.parsing.TileGroup;
  */
 public class ExclusiveGroups implements Fu
 {
-    private Hand hand;
+    private PlayerHand hand;
     private List<TileGroup> tileGroups;
 
-    public ExclusiveGroups(Hand hand, List<TileGroup> tileGroups)
+    public ExclusiveGroups(PlayerHand hand, List<TileGroup> tileGroups)
     {
         this.hand = hand;
         this.tileGroups = tileGroups;

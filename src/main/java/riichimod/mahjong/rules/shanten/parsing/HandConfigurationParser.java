@@ -1,7 +1,7 @@
 package riichimod.mahjong.rules.shanten.parsing;
 
 import one.util.streamex.StreamEx;
-import riichimod.mahjong.Hand;
+import riichimod.mahjong.PlayerHand;
 import riichimod.mahjong.Tile;
 
 import java.util.ArrayList;
@@ -11,10 +11,10 @@ import java.util.stream.Collectors;
 
 public class HandConfigurationParser
 {
-    private final Hand hand;
+    private final PlayerHand hand;
     private final List<Tile> unmeldedTiles;
 
-    public HandConfigurationParser(Hand hand)
+    public HandConfigurationParser(PlayerHand hand)
     {
         this.hand = hand;
         unmeldedTiles = hand.getUnmeldedTiles();

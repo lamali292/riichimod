@@ -9,16 +9,17 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import riichimod.RiichiHelper;
 import riichimod.game.character.RiichiCharacter;
 import riichimod.game.util.CardStats;
+import riichimod.mahjong.Hand;
+import riichimod.mahjong.MonsterHand;
 import riichimod.mahjong.RiichiCalculator;
 import riichimod.mahjong.Tile;
 import riichimod.mahjong.rules.shanten.parsing.TileGroup;
 import riichimod.mahjong.rules.utils.MahjongTileKind;
+import riichimod.select.SelectAction;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Callable;
 import java.util.function.Function;
-import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public class StealCard extends BaseCard {
@@ -43,6 +44,19 @@ public class StealCard extends BaseCard {
     public void use(AbstractPlayer p, AbstractMonster m) {
         addToBot(new DrawCardAction(1));
         action(RiichiCalculator::getAllTileGroups);
+
+        List<AbstractMonster> monstersWithHand = RiichiHelper.enemyHands.stream().map(MonsterHand::getMonster).collect(Collectors.toList());
+        List<AbstractMonster> missingMonsters = AbstractDungeon.getMonsters().monsters.stream().filter(t->!monstersWithHand.contains(t)).collect(Collectors.toList());
+        for (AbstractMonster monster : missingMonsters) {
+            MonsterHand hand = new MonsterHand(monster);
+            RiichiHelper.enemyHands.add(hand);
+        }
+        RiichiHelper.enemyHands.forEach(t->t.draw(RiichiHelper.deck, 1));
+
+        addToBot(new SelectAction(2, RiichiHelper.enemyHands, () -> {
+            RiichiHelper.enemyHands.forEach(Hand::discardSelected);
+        }));
+
     }
 
     public void action(Function<List<MahjongTileKind>, List<TileGroup>> func) {

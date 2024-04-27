@@ -2,18 +2,18 @@ package riichimod.mahjong.rules.scoring.minipoints;
 
 import java.util.List;
 
-import riichimod.mahjong.Hand;
+import riichimod.mahjong.PlayerHand;
 import riichimod.mahjong.rules.scoring.RiichiScoringParameters;
 import riichimod.mahjong.rules.shanten.parsing.TileGroup;
 import riichimod.mahjong.rules.yakus.groupbased.Pinfu;
 
 public class TsumoFu implements Fu
 {
-    private Hand hand;
+    private PlayerHand hand;
     private List<TileGroup> groups;
     private RiichiScoringParameters parameters;
 
-    public TsumoFu(Hand hand, List<TileGroup> groups, RiichiScoringParameters parameters)
+    public TsumoFu(PlayerHand hand, List<TileGroup> groups, RiichiScoringParameters parameters)
     {
         this.hand = hand;
         this.groups = groups;

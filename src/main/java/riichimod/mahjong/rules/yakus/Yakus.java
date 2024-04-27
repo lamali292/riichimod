@@ -3,7 +3,7 @@ package riichimod.mahjong.rules.yakus;
 import java.util.ArrayList;
 import java.util.List;
 
-import riichimod.mahjong.Hand;
+import riichimod.mahjong.PlayerHand;
 import riichimod.mahjong.rules.shanten.parsing.TileGroup;
 import riichimod.mahjong.rules.scoring.RiichiScoringParameters;
 import riichimod.mahjong.rules.yakus.groupbased.*;
@@ -14,9 +14,9 @@ import riichimod.mahjong.rules.yakus.timingbased.*;
 public class Yakus
 {
     // Factory method for the standard yakus
-    public static List<Yaku> getStandardYakus(Hand hand, List<TileGroup> tileGroups, RiichiScoringParameters parameters)
+    public static List<Yaku> getStandardYakus(PlayerHand hand, List<TileGroup> tileGroups, RiichiScoringParameters parameters)
     {
-        ArrayList<Yaku> yakuList = new ArrayList<Yaku>();
+        ArrayList<Yaku> yakuList = new ArrayList<>();
 
         // group-based yakus
         yakuList.add(new GreenDragonYakuhai(hand, tileGroups));

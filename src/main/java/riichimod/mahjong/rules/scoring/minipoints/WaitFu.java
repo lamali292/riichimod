@@ -1,6 +1,6 @@
 package riichimod.mahjong.rules.scoring.minipoints;
 
-import riichimod.mahjong.Hand;
+import riichimod.mahjong.PlayerHand;
 import riichimod.mahjong.rules.utils.MahjongTileKind;
 import riichimod.mahjong.rules.shanten.parsing.TileGroup;
 
@@ -8,11 +8,11 @@ import java.util.List;
 
 public class WaitFu implements Fu
 {
-    private Hand hand;
+    private PlayerHand hand;
     private List<TileGroup> tileGroups;
     private TileGroup winningGroup;
 
-    public WaitFu(Hand hand, List<TileGroup> tileGroups, TileGroup winningGroup)
+    public WaitFu(PlayerHand hand, List<TileGroup> tileGroups, TileGroup winningGroup)
     {
         this.hand = hand;
         this.tileGroups = tileGroups;

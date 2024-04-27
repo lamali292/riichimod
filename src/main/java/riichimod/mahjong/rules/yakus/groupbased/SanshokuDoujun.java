@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-import riichimod.mahjong.Hand;
+import riichimod.mahjong.PlayerHand;
 import riichimod.mahjong.rules.shanten.parsing.TileFamily;
 import riichimod.mahjong.rules.shanten.parsing.TileGroup;
 
 public class SanshokuDoujun extends GroupBasedYaku
 {
-    public SanshokuDoujun(Hand hand, List<TileGroup> groups)
+    public SanshokuDoujun(PlayerHand hand, List<TileGroup> groups)
     {
         super(hand, groups);
     }
@@ -18,7 +18,7 @@ public class SanshokuDoujun extends GroupBasedYaku
     @Override
     public boolean isValid()
     {
-        ArrayList<TileGroup> runsCatalog = new ArrayList<TileGroup>();
+        ArrayList<TileGroup> runsCatalog = new ArrayList<>();
 
         for (TileGroup group : groups)
         {
@@ -32,7 +32,7 @@ public class SanshokuDoujun extends GroupBasedYaku
         {
             // pop first run
             TileGroup firstRun = runsCatalog.remove(0);
-            HashSet<TileFamily> families = new HashSet<TileFamily>();
+            HashSet<TileFamily> families = new HashSet<>();
             families.add(firstRun.getTileKindAt(0).getFamily());
 
             // test against other runs

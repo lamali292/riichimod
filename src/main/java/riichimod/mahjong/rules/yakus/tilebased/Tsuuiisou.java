@@ -1,10 +1,10 @@
 package riichimod.mahjong.rules.yakus.tilebased;
 
-import riichimod.mahjong.Hand;
+import riichimod.mahjong.PlayerHand;
 
 public class Tsuuiisou extends TileBasedYaku
 {
-    public Tsuuiisou(Hand hand)
+    public Tsuuiisou(PlayerHand hand)
     {
         super(hand);
     }

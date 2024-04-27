@@ -1,7 +1,7 @@
 package riichimod;
 
 import org.junit.jupiter.api.Test;
-import riichimod.mahjong.Hand;
+import riichimod.mahjong.PlayerHand;
 import riichimod.mahjong.RiichiCalculator;
 import riichimod.mahjong.Tile;
 import riichimod.mahjong.rules.shanten.parsing.TileGroup;
@@ -31,7 +31,7 @@ class RiichiCalculatorTest {
     public void calcYakuTest() {
         List<MahjongTileKind> mtiles = genMahjongTiles(0,0,1,1,2,2,9,9,10,10,11,11,30,30);
         List<Tile> tiles = mtiles.stream().map(Tile::new).collect(Collectors.toList());
-        Hand hand = new Hand(tiles);
+        PlayerHand hand = new PlayerHand(tiles);
         RiichiScoringParametersImpl para = new RiichiScoringParametersImpl(Seat.EAST);
         List<Yaku> yakus = RiichiCalculator.getYakus(hand, para);
         if (!yakus.isEmpty()) {

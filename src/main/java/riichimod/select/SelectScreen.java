@@ -5,30 +5,42 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.*;
 import com.megacrit.cardcrawl.helpers.input.InputHelper;
 import riichimod.RiichiHelper;
+import riichimod.mahjong.rules.shanten.Pair;
+
+import java.util.List;
 
 public class SelectScreen {
 
-    private final SelectableHolder holder;
+    private final List<? extends SelectableHolder> holders;
+    private final boolean anyNumber;
     private int numCards = 0;
 
-    
-    public SelectScreen(SelectableHolder holder) {
-        this.holder = holder;
+    public SelectScreen(List<? extends SelectableHolder> holders) {
+        this.holders = holders;
+        this.anyNumber = false;
     }
-    public int getHovered() {
-        //System.out.println(RiichiHelper.hand.slots.stream().map(t->t.pos.x).collect(Collectors.toList()));
-        for (Selectable selectable : holder.getSelectables()) {
-            selectable.getHitbox().update();
-            if (selectable.getHitbox().hovered) {
-                return selectable.getID();
+
+    public SelectScreen(List<? extends SelectableHolder> holders, boolean anyNumber) {
+        this.holders = holders;
+        this.anyNumber = anyNumber;
+    }
+    public Pair<SelectableHolder,Integer> getHovered() {
+        for (SelectableHolder holder : holders) {
+            for (Selectable selectable : holder.getSelectables()) {
+                selectable.getHitbox().update();
+                if (selectable.getHitbox().hovered) {
+                    return new Pair<>(holder, selectable.getID());
+                }
             }
         }
-        return -1;
+        return new Pair<>(null, null);
     }
 
     public void update() {
-        int id = getHovered();
-        if (id == -1) return;
+        Pair<SelectableHolder, Integer> ids = getHovered();
+        if (ids.getFirst() == null || ids.getSecond() == null) return;
+        SelectableHolder holder = ids.getFirst();
+        int id = ids.getSecond();
         Hitbox hb = holder.getSelectables().get(id).getHitbox();
         if (InputHelper.justClickedLeft)
             hb.clickStarted = true;
@@ -40,7 +52,7 @@ public class SelectScreen {
                 holder.deselect(id);
             }
             CardCrawlGame.sound.play("CARD_SELECT");
-            if (holder.selected() >= numCards) {
+            if (holders.stream().mapToInt(SelectableHolder::selected).sum() >= numCards) {
                 close();
             }
         }

@@ -1,6 +1,6 @@
 package riichimod.mahjong.rules.yakus.groupbased;
 
-import riichimod.mahjong.Hand;
+import riichimod.mahjong.PlayerHand;
 import riichimod.mahjong.rules.shanten.parsing.TileGroup;
 
 import java.util.ArrayList;
@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Ryanpeikou extends GroupBasedYaku
 {
-    public Ryanpeikou(Hand hand, List<TileGroup> groups)
+    public Ryanpeikou(PlayerHand hand, List<TileGroup> groups)
     {
         super(hand, groups);
     }
@@ -18,8 +18,8 @@ public class Ryanpeikou extends GroupBasedYaku
     {
         if (hand.isClosed())
         {
-            ArrayList<TileGroup> sequencesFound = new ArrayList<TileGroup>();
-            ArrayList<TileGroup> matchesFound = new ArrayList<TileGroup>(); // a match found is any sequence that is present at least twice
+            ArrayList<TileGroup> sequencesFound = new ArrayList<>();
+            ArrayList<TileGroup> matchesFound = new ArrayList<>(); // a match found is any sequence that is present at least twice
 
             for (TileGroup group : groups)
             {
