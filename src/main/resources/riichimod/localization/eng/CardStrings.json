@@ -1,0 +1,53 @@
+{
+  "${modID}:BaseCard": {
+    "NAME": "Strike",
+    "DESCRIPTION": "Description.",
+    "UPGRADE_DESCRIPTION": "This will automatically be used if the card is upgraded. Remove it if unneeded.",
+    "EXTENDED_DESCRIPTION": [
+      "Gain !B! Block. NL Deal !D! damage."
+    ]
+  },"${modID}:StrikeCard": {
+    "NAME": "Strike",
+  "DESCRIPTION": "Deal !D! damage."
+  },
+  "${modID}:DefendCard": {
+    "NAME": "Defend",
+    "DESCRIPTION": "Gain !B! Block."
+  },
+  "${modID}:RonCard": {
+    "NAME": "Ron",
+    "DESCRIPTION": "Gain !B! Block. NL Deal !D! damage."
+  },
+  "${modID}:StealCard": {
+    "NAME": "Steal",
+    "DESCRIPTION": ""
+  },
+  "${modID}:PonCard": {
+    "NAME": "Pon",
+    "DESCRIPTION": ""
+  },
+  "${modID}:KanCard": {
+    "NAME": "Kan",
+    "DESCRIPTION": ""
+  },
+  "${modID}:ChiiCard": {
+    "NAME": "Chii",
+    "DESCRIPTION": ""
+  },
+  "${modID}:MoreDrawCard": {
+    "NAME": "Draw More",
+    "DESCRIPTION": ""
+  },
+  "${modID}:YakumanCard": {
+    "NAME": "Yakuman",
+    "DESCRIPTION": "Gain !B! Block. NL Deal !D! damage."
+  },
+  "${modID}:DrawCard": {
+    "NAME": "Draw",
+    "DESCRIPTION": "NL Draw !M! tile. NL Discard !M! tile. NL Draw !M! card."
+  },
+  "${modID}:TileCard": {
+    "NAME": "Tile",
+    "DESCRIPTION": ""
+  }
+}
