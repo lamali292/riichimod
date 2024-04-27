@@ -4,17 +4,30 @@ import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.core.Settings;
 import riichimod.RiichiHelper;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class SelectAction extends AbstractGameAction {
     private final Runnable runnable;
     private final List<? extends SelectableHolder> selectables;
+    private final boolean anyNumber;
 
-    public SelectAction(int amount, List<? extends SelectableHolder> selectables, Runnable runnable) {
+    public SelectAction(int amount, List<? extends SelectableHolder> selectables, boolean anyNumber, Runnable runnable) {
         this.amount = amount;
+        this.anyNumber = anyNumber;
         this.selectables = selectables;
         this.duration = this.startDuration = Settings.ACTION_DUR_XFAST;
         this.runnable = runnable;
+    }
+
+    public SelectAction(int amount, SelectableHolder selectable, boolean anyNumber, Runnable runnable) {
+        this(amount,  Stream.of(selectable).collect(Collectors.toList()), anyNumber, runnable);
+    }
+
+    public SelectAction(int amount, SelectableHolder selectable, Runnable runnable) {
+        this(amount,  selectable, false, runnable);
     }
 
     @Override
@@ -24,11 +37,11 @@ public class SelectAction extends AbstractGameAction {
                 this.isDone = true;
                 return;
             }
-            RiichiHelper.riichiSelectScreen = new SelectScreen(selectables);
+            RiichiHelper.riichiSelectScreen = new SelectScreen(selectables, anyNumber);
             RiichiHelper.riichiSelectScreen.open(this.amount);
             this.tickDuration();
         }
-        if (selectables.stream().mapToInt(SelectableHolder::selected).sum() >= this.amount) {
+        if (RiichiHelper.riichiSelectScreen.skipped || selectables.stream().mapToInt(SelectableHolder::selected).sum() >= this.amount) {
             this.runnable.run();
             this.isDone = true;
         }

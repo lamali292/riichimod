@@ -103,13 +103,21 @@ public abstract class Hand implements SelectableHolder {
         return maxHandSize;
     }
 
-    public void discardSelected() {
+    public List<Tile> getSelectedTiles() {
         List<Tile> from = getInHand();
-        List<Tile> discards = slots.stream().filter(s->s.selected).map(Slot::getID).map(from::get).collect(Collectors.toList());
+        return slots.stream().filter(s->s.selected).map(Slot::getID).map(from::get).collect(Collectors.toList());
+    }
+
+    public void resetSelected() {
         slots.stream().filter(s->s.selected).forEach(s->s.selected = false);
-        discard(discards);
         selected = 0;
-        sortAndClear();
+    }
+
+    public void discardSelected() {
+        List<Tile> discards = getSelectedTiles();
+        resetSelected();
+        discard(discards);
+        clearAndSort();
     }
 
     public void discard(List<Tile> discards) {
@@ -121,10 +129,22 @@ public abstract class Hand implements SelectableHolder {
         Collections.sort(tiles);
     }
 
-    public void sortAndClear() {
+    public void clearAndSort() {
+        clear();
         sort();
+    }
+
+    public void clear() {
         int msize = getMaxHandSize();
         if (slots.size() > msize) {
+            slots.subList(msize, slots.size()).clear();
+        }
+    }
+
+    public void clearWithTiles() {
+        int msize = getMaxHandSize();
+        if (slots.size() > msize) {
+            tiles.subList(msize, tiles.size()).clear();
             slots.subList(msize, slots.size()).clear();
         }
     }

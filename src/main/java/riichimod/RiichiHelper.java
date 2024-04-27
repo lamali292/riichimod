@@ -38,6 +38,7 @@ public class RiichiHelper {
         if (doStuff) {
             hand.render(sb);
             enemyHands.forEach(g->g.render(sb));
+            if (handSelection && riichiSelectScreen != null) riichiSelectScreen.render(sb);
         }
     }
 

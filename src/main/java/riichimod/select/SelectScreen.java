@@ -1,9 +1,11 @@
 package riichimod.select;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.*;
 import com.megacrit.cardcrawl.helpers.input.InputHelper;
+import com.megacrit.cardcrawl.ui.buttons.GridSelectConfirmButton;
 import riichimod.RiichiHelper;
 import riichimod.mahjong.rules.shanten.Pair;
 
@@ -11,18 +13,25 @@ import java.util.List;
 
 public class SelectScreen {
 
+    public boolean skipped = false;
+    GridSelectConfirmButton button;
     private final List<? extends SelectableHolder> holders;
     private final boolean anyNumber;
     private int numCards = 0;
 
     public SelectScreen(List<? extends SelectableHolder> holders) {
-        this.holders = holders;
-        this.anyNumber = false;
+        this(holders, false);
     }
 
     public SelectScreen(List<? extends SelectableHolder> holders, boolean anyNumber) {
         this.holders = holders;
         this.anyNumber = anyNumber;
+        if (anyNumber) {
+            button = new GridSelectConfirmButton("Confirm");
+            button.show();
+            button.isDisabled = false;
+        }
+
     }
     public Pair<SelectableHolder,Integer> getHovered() {
         for (SelectableHolder holder : holders) {
@@ -37,6 +46,16 @@ public class SelectScreen {
     }
 
     public void update() {
+        if (anyNumber) {
+            button.update();
+            if (button.hb.clicked) {
+                button.hb.clicked = false;
+                skipped = true;
+                close();
+                return;
+            }
+        }
+
         Pair<SelectableHolder, Integer> ids = getHovered();
         if (ids.getFirst() == null || ids.getSecond() == null) return;
         SelectableHolder holder = ids.getFirst();
@@ -57,6 +76,16 @@ public class SelectScreen {
             }
         }
     }
+
+    public void render(SpriteBatch sb) {
+        if (anyNumber) {
+            button.render(sb);
+        }
+    }
+
+
+
+
 
     public void close() {
         RiichiHelper.handSelection = false;

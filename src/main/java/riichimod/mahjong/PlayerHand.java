@@ -54,7 +54,7 @@ public class PlayerHand extends Hand {
         if (tileGroup.isQuad()) {
             draw(deck, 1);
         }
-        sortAndClear();
+        clearAndSort();
     }
 
     @Override

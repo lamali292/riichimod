@@ -31,14 +31,11 @@ public class DrawCard extends BaseCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        List<SelectableHolder> holders = new ArrayList<>();
-        holders.add(RiichiHelper.hand);
-
         addToBot(new DrawCardAction(magicNumber));
 
         RiichiHelper.hand.draw(RiichiHelper.deck, magicNumber+RiichiHelper.drawPower);
         RiichiHelper.hand.calcYaku();
-        addToBot(new SelectAction(magicNumber + RiichiHelper.drawPower, holders, () -> {
+        addToBot(new SelectAction(magicNumber + RiichiHelper.drawPower, RiichiHelper.hand, () -> {
             RiichiHelper.hand.discardSelected();
         }));
     }
