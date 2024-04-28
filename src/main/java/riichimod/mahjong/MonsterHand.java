@@ -28,4 +28,13 @@ public class MonsterHand extends Hand {
         return 0;
     }
 
+    public static MonsterHand getHand(AbstractMonster monster) {
+        for (MonsterHand hand : RiichiHelper.enemyHands) {
+            if (hand.getMonster() == monster) {
+                return hand;
+            }
+        }
+        return null;
+    }
+
 }

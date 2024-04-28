@@ -7,6 +7,7 @@ import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import riichimod.RiichiHelper;
@@ -22,6 +23,7 @@ import riichimod.select.SelectAction;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -43,6 +45,7 @@ public class TestCard extends BaseCard {
     public void use(AbstractPlayer p, AbstractMonster m) {
         addToBot(new DrawCardAction(1));
         //action(RiichiCalculator::getAllTileGroups);
+        removeDeadMonsterHands();
         addMissingMonsterHands();
         RiichiHelper.enemyHands.forEach(t->t.draw(RiichiHelper.deck, 1));
         //generateGroups();
@@ -81,7 +84,10 @@ public class TestCard extends BaseCard {
                 RiichiHelper.hand.add(new Tile(extraTile));
                 RiichiHelper.hand.addNewSlot();
                 RiichiHelper.hand.addMeld(((SelectCard) card).tileGroup, RiichiHelper.deck);
-                addToTop(new DamageAction(m, new DamageInfo(AbstractDungeon.player, 10, DamageInfo.DamageType.NORMAL), AbstractGameAction.AttackEffect.SLASH_VERTICAL));
+                for(MahjongTileKind kinds : ((SelectCard) card).tileGroup.getTileKinds()) {
+                    int d = kinds.isNumeral() ? kinds.getTileNumber() : 10;
+                    addToTop(new DamageAction(m, new DamageInfo(AbstractDungeon.player, d, DamageInfo.DamageType.NORMAL), AbstractGameAction.AttackEffect.SLASH_VERTICAL));
+                }
                 addToTop(new SelectAction(1, RiichiHelper.hand, () -> {
                     RiichiHelper.hand.discardSelected();
                 }));
@@ -91,13 +97,20 @@ public class TestCard extends BaseCard {
     }
 
 
+    public void removeDeadMonsterHands() {
+        List<MonsterHand> hands = RiichiHelper.enemyHands.stream().map(MonsterHand::getMonster)
+                .filter(AbstractCreature::isDeadOrEscaped)
+                .map(MonsterHand::getHand)
+                .filter(Objects::nonNull).collect(Collectors.toList());
+        hands.forEach(MonsterHand::removeThis);
+    }
+
     public void addMissingMonsterHands(){
         List<AbstractMonster> monstersWithHand = RiichiHelper.enemyHands.stream().map(MonsterHand::getMonster).collect(Collectors.toList());
-        List<AbstractMonster> missingMonsters = AbstractDungeon.getMonsters().monsters.stream().filter(t->!monstersWithHand.contains(t)).collect(Collectors.toList());
-        for (AbstractMonster monster : missingMonsters) {
-            MonsterHand hand = new MonsterHand(monster);
-            RiichiHelper.enemyHands.add(hand);
-        }
+        AbstractDungeon.getMonsters().monsters.stream()
+                .filter(t->!monstersWithHand.contains(t))
+                .filter(t->!t.isDeadOrEscaped())
+                .forEach(t->RiichiHelper.enemyHands.add(new MonsterHand(t)));
     }
 
     @Override
