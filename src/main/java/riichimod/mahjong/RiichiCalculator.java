@@ -112,7 +112,7 @@ public class RiichiCalculator {
         List<Integer> scores = new ArrayList<>();
         // System.out.println(hand.getTiles().stream().map(Tile::getTileKind).collect(Collectors.toList()));
         List<TileGroup> melded = hand.getMelds();
-        List<List<TileGroup>> handCombinations = calcTileGroups(hand.getUnmeldedTiles().stream().map(Tile::getTileKind).collect(Collectors.toList()));
+        List<List<TileGroup>> handCombinations = calcTileGroups(hand.getOpenTiles().stream().map(Tile::getTileKind).collect(Collectors.toList()));
         for (List<TileGroup> tileGroups : handCombinations) {
             tileGroups.addAll(melded);
             List<Yaku> yakus;

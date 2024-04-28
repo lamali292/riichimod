@@ -19,8 +19,8 @@ public abstract class Hand implements SelectableHolder {
     public int maxHandSize = 13;
     int selected = 0;
 
-    public ArrayList<Tile> tiles;
-    public List<TileSlot> slots;
+    private ArrayList<Tile> tiles;
+    private final List<TileSlot> slots;
     public static final int cardHeight = 80;
     public static final int cardWidth = 60;
 
@@ -30,8 +30,8 @@ public abstract class Hand implements SelectableHolder {
         tiles = new ArrayList<>();
     }
 
-    public List<Tile> getInHand() {
-        return tiles;
+    public int getSize() {
+        return tiles.size();
     }
 
     public void add(Tile tile) {
@@ -95,7 +95,7 @@ public abstract class Hand implements SelectableHolder {
     }
 
     public void genMissingSlots() {
-        for (int i = slots.size(); i < getInHand().size(); i++) {
+        for (int i = slots.size(); i < getSize(); i++) {
             addNewSlot();
         }
     }
@@ -104,12 +104,11 @@ public abstract class Hand implements SelectableHolder {
     }
 
     public List<Tile> getSelectedTiles() {
-        List<Tile> from = getInHand();
-        return slots.stream().filter(s->s.selected).map(Slot::getID).map(from::get).collect(Collectors.toList());
+        return slots.stream().filter(s->s.selected).map(Slot::getID).map(tiles::get).collect(Collectors.toList());
     }
 
     public void resetSelected() {
-        slots.stream().filter(s->s.selected).forEach(s->s.selected = false);
+        slots.forEach(s->s.selected = false);
         selected = 0;
     }
 
@@ -121,8 +120,7 @@ public abstract class Hand implements SelectableHolder {
     }
 
     public void discard(List<Tile> discards) {
-        List<Tile> from = getInHand();
-        discards.stream().filter(from::contains).forEach(tiles::remove);
+        discards.stream().filter(tiles::contains).forEach(tiles::remove);
     }
 
     public void sort() {
@@ -135,10 +133,13 @@ public abstract class Hand implements SelectableHolder {
     }
 
     public void clear() {
+        slots.subList(getSize(), slots.size()).clear();
+        /*
         int msize = getMaxHandSize();
         if (slots.size() > msize) {
             slots.subList(msize, slots.size()).clear();
         }
+         */
     }
 
     public void clearWithTiles() {

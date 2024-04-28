@@ -17,7 +17,7 @@ public class HandConfigurationParser
     public HandConfigurationParser(PlayerHand hand)
     {
         this.hand = hand;
-        unmeldedTiles = hand.getUnmeldedTiles();
+        unmeldedTiles = hand.getOpenTiles();
     }
 
     private List<TileGroup> getMeldedTileGroups() {

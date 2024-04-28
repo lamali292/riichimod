@@ -14,8 +14,8 @@ public class TileSlot extends Slot {
 
     public void render(SpriteBatch sb) {
         sb.draw(RiichiDeck.sequenceSlot, pos.x, pos.y + bob.y, 0, 0, RiichiDeck.sequenceSlot.getWidth() * Settings.scale, RiichiDeck.sequenceSlot.getHeight() * Settings.scale, 1, 1, 0, 0, 0, RiichiDeck.sequenceSlot.getWidth(), RiichiDeck.sequenceSlot.getHeight(), false, false);
-        if (id >= hand.getInHand().size()) return;
-        Tile tile = hand.getInHand().get(id);
+        if (id >= hand.getSize()) return;
+        Tile tile = hand.getTiles().get(id);
         if (tile != null) {
             renderTile(sb, tile, pos.x + 8F, pos.y + bob.y + 55F);
         }

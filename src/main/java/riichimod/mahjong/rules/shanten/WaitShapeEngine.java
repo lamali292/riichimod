@@ -80,7 +80,7 @@ public class WaitShapeEngine
 
     private void computeWait()
     {
-        unmeldedTiles = hand.getUnmeldedTiles();
+        unmeldedTiles = hand.getOpenTiles();
 
         // get unmelded tiles
         List<Tile> characterTiles = getUnmeldedTiles().stream().filter(tile -> tile.getTileKind().isCharacters()).collect(Collectors.toList());

@@ -29,17 +29,16 @@ public class PlayerHand extends Hand {
 
     public PlayerHand(List<Tile> tile) {
         this();
-        tiles.addAll(tile);
+        getTiles().addAll(tile);
     }
 
-    @Override
-    public List<Tile> getInHand() {
-        return getUnmeldedTiles();
+    public int getSize() {
+        return getTiles().size();
     }
 
     public void addNewMeldSlot() {
         BobEffect bob = new BobEffect();
-        Vector2 vec = new Vector2((177F + 75F*getMeldedTilesCount()+ 23F*melds.size()) * Settings.xScale, 800f * Settings.yScale);
+        Vector2 vec = new Vector2((pos.x + 75F*getMeldedTilesCount()+ 23F*melds.size()) * Settings.xScale, (pos.y+150F) * Settings.yScale);
         meldSlots.add(new MeldSlot(this, meldSlots.size(), vec, bob));
     }
 
@@ -51,6 +50,7 @@ public class PlayerHand extends Hand {
     public void addMeld(TileGroup tileGroup, RiichiDeck deck) {
         addNewMeldSlot();
         melds.add(tileGroup);
+        tileGroup.getTileKinds().stream().map(Tile::new).forEach(t->getTiles().remove(t));
         if (tileGroup.isQuad()) {
             draw(deck, 1);
         }
@@ -74,11 +74,8 @@ public class PlayerHand extends Hand {
         return melds;
     }
 
-    public List<Tile> getUnmeldedTiles() {
-        List<Tile> unmeldedTiles = new ArrayList<>(getTiles());
-        List<Tile> meldedTiles = getMelds().stream().map(TileGroup::getTileKinds).flatMap(List::stream).map(Tile::new).collect(Collectors.toList());
-        meldedTiles.forEach(unmeldedTiles::remove);
-        return unmeldedTiles;
+    public List<Tile> getOpenTiles() {
+        return getTiles();
     }
 
     public int getMeldedTilesCount() {

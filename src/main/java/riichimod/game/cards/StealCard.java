@@ -4,18 +4,14 @@ import com.evacipated.cardcrawl.mod.stslib.actions.common.SelectCardsCenteredAct
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import riichimod.RiichiHelper;
 import riichimod.game.character.RiichiCharacter;
 import riichimod.game.util.CardStats;
-import riichimod.mahjong.Hand;
-import riichimod.mahjong.MonsterHand;
 import riichimod.mahjong.RiichiCalculator;
 import riichimod.mahjong.Tile;
 import riichimod.mahjong.rules.shanten.parsing.TileGroup;
 import riichimod.mahjong.rules.utils.MahjongTileKind;
-import riichimod.select.SelectAction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,31 +40,13 @@ public class StealCard extends BaseCard {
     public void use(AbstractPlayer p, AbstractMonster m) {
         addToBot(new DrawCardAction(1));
         action(RiichiCalculator::getAllTileGroups);
-        action2();
-    }
-
-    public void action2() {
-        List<AbstractMonster> monstersWithHand = RiichiHelper.enemyHands.stream().map(MonsterHand::getMonster).collect(Collectors.toList());
-        List<AbstractMonster> missingMonsters = AbstractDungeon.getMonsters().monsters.stream().filter(t->!monstersWithHand.contains(t)).collect(Collectors.toList());
-        for (AbstractMonster monster : missingMonsters) {
-            MonsterHand hand = new MonsterHand(monster);
-            RiichiHelper.enemyHands.add(hand);
-        }
-        RiichiHelper.enemyHands.forEach(t->t.draw(RiichiHelper.deck, 1));
-
-        addToBot(new SelectAction(2, RiichiHelper.enemyHands, true, this::action3));
-    }
-
-    public void action3() {
-        List<Tile> tiles = RiichiHelper.enemyHands.stream().map(Hand::getSelectedTiles).flatMap(List::stream).collect(Collectors.toList());
-        RiichiHelper.enemyHands.forEach(Hand::clearWithTiles);
-        RiichiHelper.enemyHands.forEach(Hand::resetSelected);
     }
 
     public void action(Function<List<MahjongTileKind>, List<TileGroup>> func) {
-        List<MahjongTileKind> tileKinds = RiichiHelper.hand.getUnmeldedTiles().stream().map(Tile::getTileKind).collect(Collectors.toList());
+        List<MahjongTileKind> tileKinds = RiichiHelper.hand.getOpenTiles().stream().map(Tile::getTileKind).collect(Collectors.toList());
         List<TileGroup> groupList = func.apply(tileKinds);
         ArrayList<AbstractCard> cardGroups = groupList.stream().map(SelectCard::new).collect(Collectors.toCollection(ArrayList::new));
+        if (cardGroups.isEmpty()) return;
         addToBot(new SelectCardsCenteredAction(cardGroups, 1, "", true, t->true, (cards) -> {
             for (AbstractCard card : cards) {
                 RiichiHelper.hand.addMeld(((SelectCard) card).tileGroup, RiichiHelper.deck);
