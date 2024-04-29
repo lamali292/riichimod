@@ -2,8 +2,8 @@ package riichimod.mahjong.rules.yakus.groupbased;
 
 import riichimod.mahjong.PlayerHand;
 import riichimod.mahjong.rules.utils.MahjongTileKind;
-import riichimod.mahjong.rules.shanten.parsing.TileFamily;
-import riichimod.mahjong.rules.shanten.parsing.TileGroup;
+import riichimod.mahjong.rules.utils.TileFamily;
+import riichimod.mahjong.rules.utils.TileGroup;
 
 import java.util.ArrayList;
 import java.util.List;

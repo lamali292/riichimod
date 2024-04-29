@@ -1,6 +1,4 @@
-package riichimod.mahjong.rules.shanten.parsing;
-
-import riichimod.mahjong.rules.utils.MahjongTileKind;
+package riichimod.mahjong.rules.utils;
 
 import java.util.ArrayList;
 import java.util.Arrays;

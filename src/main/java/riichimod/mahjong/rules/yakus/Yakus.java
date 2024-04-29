@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import riichimod.mahjong.PlayerHand;
-import riichimod.mahjong.rules.shanten.parsing.TileGroup;
+import riichimod.mahjong.rules.utils.TileGroup;
 import riichimod.mahjong.rules.scoring.RiichiScoringParameters;
 import riichimod.mahjong.rules.yakus.groupbased.*;
 import riichimod.mahjong.rules.yakus.groupbased.yakuhai.*;

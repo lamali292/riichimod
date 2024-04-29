@@ -19,8 +19,8 @@ public abstract class Hand implements SelectableHolder {
     public int maxHandSize = 13;
     int selected = 0;
 
-    private ArrayList<Tile> tiles;
-    private final List<TileSlot> slots;
+    public ArrayList<Tile> tiles;
+    public final List<TileSlot> slots;
     public static final int cardHeight = 80;
     public static final int cardWidth = 60;
 
@@ -134,12 +134,6 @@ public abstract class Hand implements SelectableHolder {
 
     public void clear() {
         slots.subList(getSize(), slots.size()).clear();
-        /*
-        int msize = getMaxHandSize();
-        if (slots.size() > msize) {
-            slots.subList(msize, slots.size()).clear();
-        }
-         */
     }
 
     public void clearWithTiles() {
@@ -153,10 +147,6 @@ public abstract class Hand implements SelectableHolder {
 
     public List<Tile> getTiles()    {
         return tiles;
-    }
-
-    public void setTiles(List<Tile> tile)    {
-        tiles = new ArrayList<>(tile);
     }
 
 

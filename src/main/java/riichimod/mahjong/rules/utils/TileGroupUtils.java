@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import riichimod.mahjong.Tile;
-import riichimod.mahjong.rules.shanten.parsing.TileGroup;
 
 public class TileGroupUtils
 {

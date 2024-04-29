@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import riichimod.mahjong.PlayerHand;
 import riichimod.mahjong.RiichiCalculator;
 import riichimod.mahjong.Tile;
-import riichimod.mahjong.rules.shanten.parsing.TileGroup;
+import riichimod.mahjong.rules.utils.TileGroup;
 import riichimod.mahjong.rules.utils.MahjongTileKind;
 import riichimod.mahjong.rules.yakus.Yaku;
 import riichimod.mahjong.rules.scoring.RiichiScoringParametersImpl;

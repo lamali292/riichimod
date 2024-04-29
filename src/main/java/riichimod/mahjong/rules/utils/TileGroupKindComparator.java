@@ -1,4 +1,4 @@
-package riichimod.mahjong.rules.shanten.parsing;
+package riichimod.mahjong.rules.utils;
 
 import java.util.Comparator;
 import java.util.Objects;

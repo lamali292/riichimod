@@ -1,15 +1,12 @@
 package riichimod.mahjong;
 
-import riichimod.mahjong.rules.shanten.parsing.TileGroup;
+import riichimod.mahjong.rules.utils.TileGroup;
 import riichimod.mahjong.rules.utils.MahjongTileKind;
 import riichimod.mahjong.rules.yakus.Yaku;
 import riichimod.mahjong.rules.scoring.RiichiScoring;
 import riichimod.mahjong.rules.scoring.RiichiScoringParametersImpl;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -176,6 +173,44 @@ public class RiichiCalculator {
 
     public static List<TileGroup> getQuadruplets(List<MahjongTileKind> tileKinds) {
         return tileKinds.stream().distinct().filter(t->tileKinds.stream().filter(t::equals).count() >= 4).map(MahjongTileKind::getIndex).map(t->new TileGroup(t,t,t,t)).collect(Collectors.toList());
+    }
+
+    public static TileGroup getTripletGroup(MahjongTileKind tile) {
+        return new TileGroup(tile.getIndex(), tile.getIndex(), tile.getIndex());
+    }
+
+    public static TileGroup getQuadrupletGroup(MahjongTileKind tile) {
+        return new TileGroup(tile.getIndex(), tile.getIndex(), tile.getIndex(), tile.getIndex());
+    }
+
+    public static List<TileGroup> getSequenceGroups(MahjongTileKind tile) {
+        List<TileGroup> groups = new ArrayList<>();
+        if (tile.isHonour()) return groups;
+        if (tile.getTileNumber()>2) groups.add(new TileGroup(tile.getIndex()-2, tile.getIndex()-1, tile.getIndex()));
+        if (!tile.isTerminal()) groups.add(new TileGroup(tile.getIndex()-1, tile.getIndex(), tile.getIndex()+1));
+        if (tile.getTileNumber()<8) groups.add(new TileGroup(tile.getIndex(), tile.getIndex()+1, tile.getIndex()+2));
+        return groups;
+    }
+
+    public static List<TileGroup> getAllGroups(MahjongTileKind tile) {
+        List<TileGroup> groups = getSequenceGroups(tile);
+        groups.add(getTripletGroup(tile));
+        groups.add(getQuadrupletGroup(tile));
+        return groups;
+    }
+
+    public static List<TileGroup> filter(List<MahjongTileKind> tiles, List<TileGroup> groups) {
+        Map<MahjongTileKind, Long> map = tiles.stream().collect(Collectors.groupingBy(g->g, Collectors.counting()));
+        return groups.stream().filter(t->{
+            Map<MahjongTileKind, Long> target = t.getTileKinds().stream().collect(Collectors.groupingBy(g->g, Collectors.counting()));
+            return target.keySet().stream().allMatch(k->map.getOrDefault(k,0L)>=target.get(k));
+        }).collect(Collectors.toList());
+    }
+
+    public static List<TileGroup> getGroupsInHand(List<Tile> tiles, Tile tile) {
+        List<Tile> ntiles = new ArrayList<>(tiles);
+        ntiles.add(tile);
+        return filter(ntiles.stream().map(Tile::getTileKind).collect(Collectors.toList()), getAllGroups(tile.getTileKind()));
     }
 
 }

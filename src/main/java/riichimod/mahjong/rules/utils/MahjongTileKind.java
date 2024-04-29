@@ -1,7 +1,5 @@
 package riichimod.mahjong.rules.utils;
 
-import riichimod.mahjong.rules.shanten.parsing.TileFamily;
-
 import java.util.Arrays;
 import java.util.List;
 

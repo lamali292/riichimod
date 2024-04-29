@@ -2,7 +2,7 @@ package riichimod.mahjong.rules.yakus.tilebased;
 
 import riichimod.mahjong.PlayerHand;
 import riichimod.mahjong.Tile;
-import riichimod.mahjong.rules.shanten.parsing.TileFamily;
+import riichimod.mahjong.rules.utils.TileFamily;
 import riichimod.mahjong.rules.utils.MahjongTileKind;
 
 import java.util.function.Supplier;

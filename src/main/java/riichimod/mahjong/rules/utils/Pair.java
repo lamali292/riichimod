@@ -1,4 +1,4 @@
-package riichimod.mahjong.rules.shanten;
+package riichimod.mahjong.rules.utils;
 
 public class Pair<T, U>
 {

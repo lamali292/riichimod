@@ -5,12 +5,11 @@ import java.util.stream.Collectors;
 
 import riichimod.mahjong.PlayerHand;
 import riichimod.mahjong.rules.utils.TileGroupUtils;
-import riichimod.mahjong.rules.shanten.parsing.TileGroup;
+import riichimod.mahjong.rules.utils.TileGroup;
 import riichimod.mahjong.rules.yakus.Yaku;
 import riichimod.mahjong.rules.yakus.Yakus;
 
-public class RiichiScoring implements Scoring
-{
+public class RiichiScoring {
     public int getScore(List<TileGroup> tileGroups, RiichiScoringParameters parameters)
     {
         PlayerHand hand = new PlayerHand(TileGroupUtils.getTilesFromTileGroups(tileGroups));

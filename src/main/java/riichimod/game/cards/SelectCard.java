@@ -4,20 +4,16 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.evacipated.cardcrawl.modthespire.lib.SpireOverride;
-import com.evacipated.cardcrawl.modthespire.lib.SpireSuper;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.cards.DescriptionLine;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import riichimod.RiichiHelper;
 import riichimod.game.character.RiichiCharacter;
 import riichimod.mahjong.RiichiDeck;
 import riichimod.mahjong.Tile;
-import riichimod.mahjong.rules.shanten.parsing.TileGroup;
+import riichimod.mahjong.rules.utils.TileGroup;
 import riichimod.game.util.CardStats;
 
-import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 public class SelectCard extends BaseCard {

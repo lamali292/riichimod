@@ -3,7 +3,7 @@ package riichimod.mahjong.rules.yakus.groupbased;
 import riichimod.mahjong.PlayerHand;
 import riichimod.mahjong.rules.utils.Seat;
 import riichimod.mahjong.rules.utils.MahjongTileKind;
-import riichimod.mahjong.rules.shanten.parsing.TileGroup;
+import riichimod.mahjong.rules.utils.TileGroup;
 
 import java.util.ArrayList;
 import java.util.List;

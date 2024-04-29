@@ -7,7 +7,7 @@ import com.megacrit.cardcrawl.helpers.*;
 import com.megacrit.cardcrawl.helpers.input.InputHelper;
 import com.megacrit.cardcrawl.ui.buttons.GridSelectConfirmButton;
 import riichimod.RiichiHelper;
-import riichimod.mahjong.rules.shanten.Pair;
+import riichimod.mahjong.rules.utils.Pair;
 
 import java.util.List;
 

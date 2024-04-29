@@ -1,7 +1,9 @@
 package riichimod;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import riichimod.game.character.RiichiCharacter;
 import riichimod.mahjong.MonsterHand;
 import riichimod.mahjong.Hand;
@@ -11,6 +13,8 @@ import riichimod.select.SelectScreen;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class RiichiHelper {
     public static SelectScreen riichiSelectScreen;
@@ -53,5 +57,26 @@ public class RiichiHelper {
             enemyHands.forEach(Hand::update);
             if (handSelection && riichiSelectScreen != null) riichiSelectScreen.update();
         }
+    }
+
+    public static void updateMonsterHands() {
+        removeDeadMonsterHands();
+        addMissingMonsterHands();
+    }
+
+    public static void removeDeadMonsterHands() {
+        List<MonsterHand> hands = RiichiHelper.enemyHands.stream().map(MonsterHand::getMonster)
+                .filter(AbstractCreature::isDeadOrEscaped)
+                .map(MonsterHand::getHand)
+                .filter(Objects::nonNull).collect(Collectors.toList());
+        hands.forEach(MonsterHand::removeThis);
+    }
+
+    public static void addMissingMonsterHands(){
+        List<AbstractMonster> monstersWithHand = RiichiHelper.enemyHands.stream().map(MonsterHand::getMonster).collect(Collectors.toList());
+        AbstractDungeon.getMonsters().monsters.stream()
+                .filter(t->!monstersWithHand.contains(t))
+                .filter(t->!t.isDeadOrEscaped())
+                .forEach(t->RiichiHelper.enemyHands.add(new MonsterHand(t)));
     }
 }

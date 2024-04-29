@@ -5,29 +5,18 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.vfx.BobEffect;
-import riichimod.mahjong.rules.shanten.parsing.TileGroup;
+import riichimod.mahjong.rules.utils.TileGroup;
+import riichimod.select.SelectableHolder;
 
 import java.util.stream.Collectors;
 
 public class MeldSlot extends Slot {
-    public MeldSlot(PlayerHand hand, int id, Vector2 pos, BobEffect bob) {
-        super(hand, id, pos, bob, null);
+    public MeldSlot(SelectableHolder holder, int id, Vector2 pos, BobEffect bob) {
+        super(holder, id, pos, bob, null);
     }
 
     public void render(SpriteBatch sb) {
-        TileGroup tileGroup = ((PlayerHand)hand).melds.get(id);
-        Texture tex;
-        if (tileGroup.getSize() == 4) {
-            tex = RiichiDeck.meldSlot4;
-        } else {
-            tex = RiichiDeck.meldSlot3;
-        }
-        sb.draw(tex, pos.x, pos.y + bob.y, 0, 0, tex.getWidth() * Settings.scale, tex.getHeight() * Settings.scale, 1, 1, 0, 0, 0, tex.getWidth(), tex.getHeight(), false, false);
-        //if (id >= hand.getMelds().size()) return;
-        int m = 0;
-        for (Tile tile : tileGroup.getTileKinds().stream().map(Tile::new).collect(Collectors.toList())) {
-            renderTile(sb, tile, pos.x + (8F + m*75F)* Settings.xScale, pos.y + bob.y + 55F*Settings.yScale);
-            m++;
-        }
+        TileGroup tileGroup = (TileGroup) holder.getSelectables().get(id);
+        renderTileGroup(sb, tileGroup, pos, bob, selected);
     }
 }

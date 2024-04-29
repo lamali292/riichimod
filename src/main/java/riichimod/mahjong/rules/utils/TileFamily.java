@@ -1,4 +1,4 @@
-package riichimod.mahjong.rules.shanten.parsing;
+package riichimod.mahjong.rules.utils;
 
 public enum TileFamily
 {

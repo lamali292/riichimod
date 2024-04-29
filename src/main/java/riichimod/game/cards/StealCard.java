@@ -10,7 +10,7 @@ import riichimod.game.character.RiichiCharacter;
 import riichimod.game.util.CardStats;
 import riichimod.mahjong.RiichiCalculator;
 import riichimod.mahjong.Tile;
-import riichimod.mahjong.rules.shanten.parsing.TileGroup;
+import riichimod.mahjong.rules.utils.TileGroup;
 import riichimod.mahjong.rules.utils.MahjongTileKind;
 
 import java.util.ArrayList;

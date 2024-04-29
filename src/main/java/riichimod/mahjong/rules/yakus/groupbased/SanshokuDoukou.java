@@ -2,7 +2,7 @@ package riichimod.mahjong.rules.yakus.groupbased;
 
 import riichimod.Counter;
 import riichimod.mahjong.PlayerHand;
-import riichimod.mahjong.rules.shanten.parsing.TileGroup;
+import riichimod.mahjong.rules.utils.TileGroup;
 import riichimod.mahjong.rules.utils.MahjongTileKind;
 
 import java.util.List;

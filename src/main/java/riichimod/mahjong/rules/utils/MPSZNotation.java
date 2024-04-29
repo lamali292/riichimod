@@ -1,8 +1,6 @@
 package riichimod.mahjong.rules.utils;
 
 import riichimod.mahjong.Tile;
-import riichimod.mahjong.rules.shanten.parsing.MahjongTileKindComparator;
-import riichimod.mahjong.rules.shanten.parsing.TileGroup;
 
 import java.util.ArrayList;
 import java.util.List;
