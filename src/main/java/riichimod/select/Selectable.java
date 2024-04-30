@@ -4,5 +4,8 @@ import com.megacrit.cardcrawl.helpers.Hitbox;
 
 public interface Selectable {
     Hitbox getHitbox();
-    int getID();
+    Holdable getHoldable();
+    boolean isSelected();
+    void setSelected(boolean selected);
+    void setHoldable(Holdable holdable);
 }

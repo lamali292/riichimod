@@ -1,4 +1,6 @@
-package riichimod.mahjong.rules.utils;
+package riichimod.mahjong.utils;
+
+import riichimod.select.Holdable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,7 +11,7 @@ import java.util.function.Predicate;
  * A tile group represents a simple group of several tiles (for instance a pair,
  * a triplet or a sequence)
  */
-public class TileGroup
+public class TileGroup implements Holdable
 {
     private final List<Integer> tileIndices;
 

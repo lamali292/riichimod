@@ -1,7 +1,9 @@
 package riichimod.mahjong;
 
-import riichimod.mahjong.rules.utils.TileGroup;
-import riichimod.mahjong.rules.utils.MahjongTileKind;
+import riichimod.mahjong.hand.PlayerHand;
+import riichimod.mahjong.utils.Tile;
+import riichimod.mahjong.utils.TileGroup;
+import riichimod.mahjong.utils.MahjongTileKind;
 import riichimod.mahjong.rules.yakus.Yaku;
 import riichimod.mahjong.rules.scoring.RiichiScoring;
 import riichimod.mahjong.rules.scoring.RiichiScoringParametersImpl;

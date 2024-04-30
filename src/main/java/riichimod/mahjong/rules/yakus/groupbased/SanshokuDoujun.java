@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-import riichimod.mahjong.PlayerHand;
-import riichimod.mahjong.rules.utils.TileFamily;
-import riichimod.mahjong.rules.utils.TileGroup;
+import riichimod.mahjong.hand.PlayerHand;
+import riichimod.mahjong.utils.TileFamily;
+import riichimod.mahjong.utils.TileGroup;
 
 public class SanshokuDoujun extends GroupBasedYaku
 {

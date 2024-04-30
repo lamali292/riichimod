@@ -1,4 +1,4 @@
-package riichimod.mahjong;
+package riichimod.mahjong.slot;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
@@ -9,23 +9,25 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.Hitbox;
 import com.megacrit.cardcrawl.vfx.BobEffect;
-import riichimod.mahjong.rules.utils.TileGroup;
-import riichimod.select.Selectable;
-import riichimod.select.SelectableHolder;
+import riichimod.mahjong.RiichiDeck;
+import riichimod.mahjong.utils.Tile;
+import riichimod.mahjong.hand.Hand;
+import riichimod.mahjong.utils.TileGroup;
+import riichimod.select.*;
 
 import java.util.stream.Collectors;
 
-public abstract class Slot implements Selectable  {
+public abstract class Slot implements Selectable, Updatable, Renderable {
     public final Vector2 pos;
     public final BobEffect bob;
-    public final int id;
     public final SelectableHolder holder;
     public final Hitbox hb;
     public boolean selected = false;
+    public Holdable holdable;
 
-    public Slot(SelectableHolder holder, int id, Vector2 pos, BobEffect bob, Hitbox hb) {
+    public Slot(SelectableHolder holder, Holdable holdable, Vector2 pos, BobEffect bob, Hitbox hb) {
         this.holder = holder;
-        this.id = id;
+        this.holdable = holdable;
         this.pos = pos;
         this.bob = bob;
         this.hb = hb;
@@ -60,6 +62,7 @@ public abstract class Slot implements Selectable  {
         }
     }
 
+    @Override
     public void update() {
         bob.update();
     }
@@ -70,7 +73,23 @@ public abstract class Slot implements Selectable  {
     }
 
     @Override
-    public int getID() {
-        return id;
+    public Holdable getHoldable() {
+        return holdable;
     }
+
+    @Override
+    public void setHoldable(Holdable hold) {
+        holdable = hold;
+    }
+
+    @Override
+    public boolean isSelected() {
+        return selected;
+    }
+
+    @Override
+    public void setSelected(boolean sel) {
+        selected = sel;
+    }
+
 }

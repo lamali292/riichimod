@@ -1,4 +1,4 @@
-package riichimod.mahjong.rules.utils;
+package riichimod.mahjong.utils;
 
 public class Pair<T, U>
 {

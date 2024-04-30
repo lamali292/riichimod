@@ -1,6 +1,4 @@
-package riichimod.mahjong.rules.utils;
-
-import riichimod.mahjong.Tile;
+package riichimod.mahjong.utils;
 
 import java.util.ArrayList;
 import java.util.List;

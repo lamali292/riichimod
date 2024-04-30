@@ -7,7 +7,7 @@ import com.megacrit.cardcrawl.helpers.*;
 import com.megacrit.cardcrawl.helpers.input.InputHelper;
 import com.megacrit.cardcrawl.ui.buttons.GridSelectConfirmButton;
 import riichimod.RiichiHelper;
-import riichimod.mahjong.rules.utils.Pair;
+import riichimod.mahjong.utils.Pair;
 
 import java.util.List;
 
@@ -33,12 +33,12 @@ public class SelectScreen {
         }
 
     }
-    public Pair<SelectableHolder,Integer> getHovered() {
+    public Pair<SelectableHolder,Selectable> getHovered() {
         for (SelectableHolder holder : holders) {
             for (Selectable selectable : holder.getSelectables()) {
                 selectable.getHitbox().update();
                 if (selectable.getHitbox().hovered) {
-                    return new Pair<>(holder, selectable.getID());
+                    return new Pair<>(holder, selectable);
                 }
             }
         }
@@ -56,11 +56,12 @@ public class SelectScreen {
             }
         }
 
-        Pair<SelectableHolder, Integer> ids = getHovered();
+        Pair<SelectableHolder, Selectable> ids = getHovered();
         if (ids.getFirst() == null || ids.getSecond() == null) return;
         SelectableHolder holder = ids.getFirst();
-        int id = ids.getSecond();
-        Hitbox hb = holder.getSelectables().get(id).getHitbox();
+        Selectable selectable = ids.getSecond();
+        Hitbox hb = selectable.getHitbox();
+        int id = holder.getID(selectable);
         if (InputHelper.justClickedLeft)
             hb.clickStarted = true;
         if (hb.clicked) {

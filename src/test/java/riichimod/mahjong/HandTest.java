@@ -1,8 +1,8 @@
 package riichimod.mahjong;
 
 import org.junit.jupiter.api.Test;
-import riichimod.mahjong.rules.utils.TileGroup;
-import riichimod.mahjong.rules.utils.MahjongTileKind;
+import riichimod.mahjong.utils.TileGroup;
+import riichimod.mahjong.utils.MahjongTileKind;
 
 import java.util.ArrayList;
 import java.util.List;

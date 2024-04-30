@@ -10,8 +10,8 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import riichimod.game.character.RiichiCharacter;
 import riichimod.mahjong.RiichiDeck;
-import riichimod.mahjong.Tile;
-import riichimod.mahjong.rules.utils.TileGroup;
+import riichimod.mahjong.utils.Tile;
+import riichimod.mahjong.utils.TileGroup;
 import riichimod.game.util.CardStats;
 
 import java.util.stream.Collectors;

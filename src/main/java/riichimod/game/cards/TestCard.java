@@ -12,11 +12,14 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import riichimod.RiichiHelper;
 import riichimod.game.character.RiichiCharacter;
 import riichimod.game.util.CardStats;
-import riichimod.mahjong.MonsterHand;
-import riichimod.mahjong.RiichiCalculator;
-import riichimod.mahjong.Tile;
-import riichimod.mahjong.rules.utils.TileGroup;
-import riichimod.mahjong.rules.utils.MahjongTileKind;
+import riichimod.mahjong.*;
+import riichimod.mahjong.hand.MeldHolder;
+import riichimod.mahjong.hand.MonsterHand;
+import riichimod.mahjong.slot.MeldSlot;
+import riichimod.mahjong.slot.Slot;
+import riichimod.mahjong.utils.Tile;
+import riichimod.mahjong.utils.TileGroup;
+import riichimod.mahjong.utils.MahjongTileKind;
 import riichimod.select.SelectAction;
 
 import java.util.ArrayList;
@@ -41,26 +44,61 @@ public class TestCard extends BaseCard {
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         addToBot(new DrawCardAction(1));
-        //action(RiichiCalculator::getAllTileGroups);
         RiichiHelper.updateMonsterHands();
         RiichiHelper.enemyHands.forEach(t->t.draw(RiichiHelper.deck, 1+RiichiHelper.drawPower));
-        addToBot(new SelectAction(1, RiichiHelper.enemyHands, true, this::generateGroups));
+        RiichiHelper.enemyHands.forEach(MonsterHand::calculatePossibleGroups);
+        addToBot(new SelectAction(1, RiichiHelper.enemyHands, true, this::generateGroups2));
     }
+
+    public void generateGroups2() {
+        for (MonsterHand monsterHand : RiichiHelper.enemyHands) {
+            if (monsterHand.getSelected().isEmpty()) {
+                monsterHand.clear();
+                monsterHand.resetSelected();
+                continue;
+            }
+            Slot slot = monsterHand.getSelected().get(0);
+            MahjongTileKind extraTile = ((Tile) slot.getHoldable()).getTileKind();
+            MeldHolder meld = monsterHand.possibleGroups.get(slot);
+            if (meld.slots.isEmpty()) {
+                monsterHand.clear();
+                monsterHand.resetSelected();
+                continue;
+            }
+            addToTop(new SelectAction(1, meld, false, () -> {
+                RiichiHelper.hand.add(new Tile(extraTile));
+                MeldSlot meldSlot = (MeldSlot) meld.getSelected().get(0);
+                RiichiHelper.hand.addMeld((TileGroup) meldSlot.getHoldable(), RiichiHelper.deck);
+                for(MahjongTileKind kinds : ((TileGroup) meldSlot.getHoldable()).getTileKinds()) {
+                    int d = kinds.isNumeral() ? kinds.getTileNumber() : 10;
+                    addToTop(new DamageAction(monsterHand.getMonster(), new DamageInfo(AbstractDungeon.player, d, DamageInfo.DamageType.NORMAL), AbstractGameAction.AttackEffect.SLASH_VERTICAL));
+                }
+                monsterHand.clear();
+                monsterHand.resetSelected();
+                addToTop(new SelectAction(1, RiichiHelper.hand, () -> {
+                    RiichiHelper.hand.discardSelected();
+                }));
+
+            }));
+
+            //monsterHand.resetSelected();
+            //monsterHand.clear();
+        }
+    }
+
 
     public void generateGroups() {
         for (MonsterHand monsterHand : RiichiHelper.enemyHands) {
-            for (Tile tile : monsterHand.getSelectedTiles()) {
-                action(monsterHand.getMonster(), RiichiCalculator::getAllTileGroups, tile.getTileKind());
+            for (Slot slot : monsterHand.getSelected()) {
+                action(monsterHand, RiichiCalculator::getAllTileGroups, slot);
             }
-            monsterHand.clearWithTiles();
             monsterHand.resetSelected();
+            monsterHand.clear();
         }
-
-
-
     }
 
-    public void action(AbstractMonster m,Function<List<MahjongTileKind>, List<TileGroup>> func, MahjongTileKind extraTile) {
+    public void action(MonsterHand monsterHand,Function<List<MahjongTileKind>, List<TileGroup>> func, Slot slot) {
+        MahjongTileKind extraTile = ((Tile) slot.getHoldable()).getTileKind();
         List<MahjongTileKind> tileKinds = RiichiHelper.hand.getTiles().stream().map(Tile::getTileKind).collect(Collectors.toList());
         tileKinds.add(extraTile);
         List<TileGroup> groupList = func.apply(tileKinds).stream().filter(t->t.contains(extraTile)).collect(Collectors.toList());
@@ -69,18 +107,16 @@ public class TestCard extends BaseCard {
         addToTop(new SelectCardsCenteredAction(cardGroups, 1, "", false, t->true, (cards) -> {
             for (AbstractCard card : cards) {
                 RiichiHelper.hand.add(new Tile(extraTile));
-                RiichiHelper.hand.addNewSlot();
                 RiichiHelper.hand.addMeld(((SelectCard) card).tileGroup, RiichiHelper.deck);
                 for(MahjongTileKind kinds : ((SelectCard) card).tileGroup.getTileKinds()) {
                     int d = kinds.isNumeral() ? kinds.getTileNumber() : 10;
-                    addToTop(new DamageAction(m, new DamageInfo(AbstractDungeon.player, d, DamageInfo.DamageType.NORMAL), AbstractGameAction.AttackEffect.SLASH_VERTICAL));
+                    addToTop(new DamageAction(monsterHand.getMonster(), new DamageInfo(AbstractDungeon.player, d, DamageInfo.DamageType.NORMAL), AbstractGameAction.AttackEffect.SLASH_VERTICAL));
                 }
                 addToTop(new SelectAction(1, RiichiHelper.hand, () -> {
                     RiichiHelper.hand.discardSelected();
                 }));
             }
         }));
-
     }
 
 

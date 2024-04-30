@@ -1,4 +1,4 @@
-package riichimod.mahjong.rules.utils;
+package riichimod.mahjong.utils;
 
 import java.util.ArrayList;
 import java.util.List;

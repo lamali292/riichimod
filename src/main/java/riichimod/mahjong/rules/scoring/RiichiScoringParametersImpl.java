@@ -1,6 +1,6 @@
 package riichimod.mahjong.rules.scoring;
 
-import riichimod.mahjong.rules.utils.Seat;
+import riichimod.mahjong.utils.Seat;
 
 public class RiichiScoringParametersImpl implements RiichiScoringParameters
 {

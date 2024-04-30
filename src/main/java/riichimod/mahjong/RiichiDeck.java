@@ -1,8 +1,9 @@
 package riichimod.mahjong;
 
 import com.badlogic.gdx.graphics.Texture;
-import riichimod.mahjong.rules.utils.MahjongTileKind;
+import riichimod.mahjong.utils.MahjongTileKind;
 import riichimod.game.util.TextureLoader;
+import riichimod.mahjong.utils.Tile;
 
 import java.util.ArrayList;
 import java.util.Collections;

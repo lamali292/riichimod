@@ -1,9 +1,10 @@
-package riichimod.mahjong;
+package riichimod.mahjong.utils;
 
 import com.badlogic.gdx.graphics.Texture;
-import riichimod.mahjong.rules.utils.MahjongTileKind;
+import riichimod.mahjong.RiichiDeck;
+import riichimod.select.Holdable;
 
-public class Tile implements Comparable<Tile> {
+public class Tile implements Comparable<Tile>, Holdable {
 
     private MahjongTileKind tileKind;
     private boolean red; // red/special tile

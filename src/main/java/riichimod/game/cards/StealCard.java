@@ -9,9 +9,9 @@ import riichimod.RiichiHelper;
 import riichimod.game.character.RiichiCharacter;
 import riichimod.game.util.CardStats;
 import riichimod.mahjong.RiichiCalculator;
-import riichimod.mahjong.Tile;
-import riichimod.mahjong.rules.utils.TileGroup;
-import riichimod.mahjong.rules.utils.MahjongTileKind;
+import riichimod.mahjong.utils.Tile;
+import riichimod.mahjong.utils.TileGroup;
+import riichimod.mahjong.utils.MahjongTileKind;
 
 import java.util.ArrayList;
 import java.util.List;

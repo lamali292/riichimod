@@ -1,7 +1,7 @@
 package riichimod.mahjong.rules.yakus.groupbased;
 
-import riichimod.mahjong.PlayerHand;
-import riichimod.mahjong.rules.utils.TileGroup;
+import riichimod.mahjong.hand.PlayerHand;
+import riichimod.mahjong.utils.TileGroup;
 
 import java.util.ArrayList;
 import java.util.List;

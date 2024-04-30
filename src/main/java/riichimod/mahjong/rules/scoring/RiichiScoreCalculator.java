@@ -3,7 +3,7 @@ package riichimod.mahjong.rules.scoring;
 import java.util.HashMap;
 import java.util.Map;
 
-import riichimod.mahjong.rules.utils.Seat;
+import riichimod.mahjong.utils.Seat;
 
 public class RiichiScoreCalculator
 {

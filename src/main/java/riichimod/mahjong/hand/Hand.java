@@ -1,25 +1,29 @@
-package riichimod.mahjong;
+package riichimod.mahjong.hand;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.helpers.Hitbox;
 import com.megacrit.cardcrawl.vfx.BobEffect;
+import riichimod.mahjong.RiichiDeck;
+import riichimod.mahjong.slot.Slot;
+import riichimod.mahjong.utils.Tile;
+import riichimod.mahjong.slot.TileSlot;
+import riichimod.select.Renderable;
 import riichimod.select.Selectable;
 import riichimod.select.SelectableHolder;
+import riichimod.select.Updatable;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public abstract class Hand implements SelectableHolder {
+public abstract class Hand implements SelectableHolder, Updatable, Renderable {
 
     public Vector2 pos = new Vector2();
     public int maxHandSize = 13;
     int selected = 0;
 
-    public ArrayList<Tile> tiles;
     public final List<TileSlot> slots;
     public static final int cardHeight = 80;
     public static final int cardWidth = 60;
@@ -27,31 +31,30 @@ public abstract class Hand implements SelectableHolder {
 
     public Hand() {
         slots = new ArrayList<>();
-        tiles = new ArrayList<>();
     }
 
     public int getSize() {
-        return tiles.size();
+        return slots.size();
     }
 
     public void add(Tile tile) {
-        tiles.add(tile);
+        addNewSlot(tile);
     }
 
     public void draw(RiichiDeck deck, int nr) {
         for (int i = 0; i < nr; i++) {
             add(deck.draw());
         }
-        genMissingSlots();
     }
 
-
+    @Override
     public void render(SpriteBatch sb) {
         slots.forEach((s)->s.render(sb));
     }
 
+    @Override
     public void update() {
-        slots.forEach(TileSlot::update);
+        slots.forEach(Slot::update);
     }
 
     @Override
@@ -66,49 +69,53 @@ public abstract class Hand implements SelectableHolder {
 
     @Override
     public void select(int id) {
-        if (!slots.get(id).selected) {
-            slots.get(id).selected = true;
+        if (!slots.get(id).isSelected()) {
+            slots.get(id).setSelected(true);
             selected++;
         }
     }
 
     @Override
     public boolean isSelected(int id) {
-        return slots.get(id).selected;
+        return slots.get(id).isSelected();
     }
 
     @Override
     public void deselect(int id) {
-        if (slots.get(id).selected) {
-            slots.get(id).selected = false;
+        if (slots.get(id).isSelected()) {
+            slots.get(id).setSelected(false);
             selected--;
         }
     }
 
-    public void addNewSlot() {
+    public int getID(Selectable selectable) {
+        return slots.indexOf((TileSlot)selectable);
+    }
+
+    public void addNewSlot(Tile tile) {
         int size = slots.size();
         float overMax = (size >= getMaxHandSize()) ? 23F : 0F;
         Vector2 vec = new Vector2((pos.x + overMax + 75F*size) * Settings.xScale, pos.y * Settings.yScale);
         BobEffect bob = new BobEffect();
         Hitbox hb = new Hitbox(vec.x+8F* Settings.xScale, vec.y + bob.y +55F* Settings.yScale, cardWidth * Settings.scale, cardHeight * Settings.scale);
-        slots.add(new TileSlot(this,slots.size(),vec,bob,hb));
+        slots.add(new TileSlot(this,tile,vec,bob,hb));
     }
 
-    public void genMissingSlots() {
-        for (int i = slots.size(); i < getSize(); i++) {
-            addNewSlot();
-        }
-    }
     public int getMaxHandSize() {
         return maxHandSize;
     }
 
     public List<Tile> getSelectedTiles() {
-        return slots.stream().filter(s->s.selected).map(Slot::getID).map(tiles::get).collect(Collectors.toList());
+        return slots.stream().filter(Selectable::isSelected).map(s->(Tile)s.getHoldable()).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Slot> getSelected() {
+        return slots.stream().filter(Selectable::isSelected).collect(Collectors.toList());
     }
 
     public void resetSelected() {
-        slots.forEach(s->s.selected = false);
+        slots.forEach(s->s.setSelected(false));
         selected = 0;
     }
 
@@ -120,11 +127,13 @@ public abstract class Hand implements SelectableHolder {
     }
 
     public void discard(List<Tile> discards) {
+        List<Tile> tiles = getTiles();
         discards.stream().filter(tiles::contains).forEach(tiles::remove);
+        setTiles(tiles);
     }
 
     public void sort() {
-        Collections.sort(tiles);
+        setTiles(getTiles().stream().sorted().collect(Collectors.toList()));
     }
 
     public void clearAndSort() {
@@ -133,20 +142,25 @@ public abstract class Hand implements SelectableHolder {
     }
 
     public void clear() {
-        slots.subList(getSize(), slots.size()).clear();
-    }
-
-    public void clearWithTiles() {
         int msize = getMaxHandSize();
         if (slots.size() > msize) {
-            tiles.subList(msize, tiles.size()).clear();
             slots.subList(msize, slots.size()).clear();
         }
     }
 
-
     public List<Tile> getTiles()    {
-        return tiles;
+        return slots.stream().map(s->(Tile)s.getHoldable()).collect(Collectors.toList());
+    }
+
+    public void setTiles(List<Tile> tiles) {
+        for (int i = 0; i < tiles.size(); i++) {
+            if (i >= slots.size()) addNewSlot(tiles.get(i));
+            else slots.get(i).setHoldable(tiles.get(i));
+        }
+        if (tiles.size() < slots.size()) {
+            slots.subList(tiles.size(), slots.size()).clear();
+        }
+
     }
 
 

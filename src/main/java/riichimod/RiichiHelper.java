@@ -5,9 +5,9 @@ import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import riichimod.game.character.RiichiCharacter;
-import riichimod.mahjong.MonsterHand;
-import riichimod.mahjong.Hand;
-import riichimod.mahjong.PlayerHand;
+import riichimod.mahjong.hand.MonsterHand;
+import riichimod.mahjong.hand.Hand;
+import riichimod.mahjong.hand.PlayerHand;
 import riichimod.mahjong.RiichiDeck;
 import riichimod.select.SelectScreen;
 
@@ -23,11 +23,12 @@ public class RiichiHelper {
     public static RiichiDeck deck;
     public static PlayerHand hand;
     public static List<MonsterHand> enemyHands;
-    public static int drawPower = 0;
+    public static int drawPower;
 
     public static void init() {
         if (AbstractDungeon.player instanceof RiichiCharacter) {
             RiichiDeck.init();
+            drawPower = 0;
             doStuff = true;
             enemyHands = new ArrayList<>();
             deck = new RiichiDeck();

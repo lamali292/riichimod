@@ -1,4 +1,4 @@
-package riichimod.mahjong.rules.utils;
+package riichimod.mahjong.utils;
 
 import java.util.Arrays;
 import java.util.List;
@@ -275,4 +275,6 @@ public enum MahjongTileKind
     {
         return isTerminal(index);
     }
+
+
 }

@@ -3,9 +3,9 @@ package riichimod.mahjong.rules.scoring;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import riichimod.mahjong.PlayerHand;
-import riichimod.mahjong.rules.utils.TileGroupUtils;
-import riichimod.mahjong.rules.utils.TileGroup;
+import riichimod.mahjong.hand.PlayerHand;
+import riichimod.mahjong.utils.TileGroupUtils;
+import riichimod.mahjong.utils.TileGroup;
 import riichimod.mahjong.rules.yakus.Yaku;
 import riichimod.mahjong.rules.yakus.Yakus;
 

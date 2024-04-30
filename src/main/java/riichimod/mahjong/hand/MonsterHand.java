@@ -1,24 +1,26 @@
-package riichimod.mahjong;
+package riichimod.mahjong.hand;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import riichimod.RiichiHelper;
-import riichimod.mahjong.rules.utils.MahjongTileKind;
-import riichimod.mahjong.rules.utils.TileGroup;
+import riichimod.mahjong.RiichiCalculator;
+import riichimod.mahjong.slot.Slot;
+import riichimod.mahjong.utils.Tile;
+import riichimod.mahjong.utils.TileGroup;
 
+import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class MonsterHand extends Hand {
     private final AbstractMonster monster;
 
+    public HashMap<Slot, MeldHolder> possibleGroups = new HashMap<>();
+
     public MonsterHand(AbstractMonster monster) {
         super();
         this.monster = monster;
-        pos = new Vector2(monster.drawX,monster.drawY);
+        pos = new Vector2(monster.hb.x,monster.hb.y+monster.hb.height);
         //draw(RiichiHelper.deck, 1);
     }
 
@@ -30,13 +32,20 @@ public class MonsterHand extends Hand {
         RiichiHelper.enemyHands.remove(this);
     }
 
+    public void calculatePossibleGroups() {
+        possibleGroups = new HashMap<>();
+        for (Slot slot : slots) {
+            List<TileGroup> groups = RiichiCalculator.getGroupsInHand(RiichiHelper.hand.getOpenTiles(), (Tile) slot.getHoldable());
+            possibleGroups.put(slot, new MeldHolder(groups, slot.pos, slot.bob));
+        }
+    }
+
     @Override
     public void render(SpriteBatch sb) {
         super.render(sb);
         for (Slot slot : slots) {
-            if (slot.getHitbox().hovered) {
-                List<TileGroup> groups = RiichiCalculator.getGroupsInHand(RiichiHelper.hand.getOpenTiles(), tiles.get(slot.getID()));
-                new MeldHolder(groups, slot.pos, slot.bob).render(sb);
+            if ((slot.getHitbox().hovered || slot.isSelected()) && possibleGroups.containsKey(slot)) {
+                possibleGroups.get(slot).render(sb);
             }
         }
     }
