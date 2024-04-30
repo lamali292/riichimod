@@ -526,8 +526,14 @@ public abstract class BaseCard extends CustomCard {
             }
             if (isMultiDamage) {
                 ArrayList<AbstractMonster> monsters = AbstractDungeon.getCurrRoom().monsters.monsters;
-                AbstractMonster m;
-                m = getAbstractMonster(m, monsters);
+                for (LocalVarInfo var : cardVariables.values()) {
+                    if (var.aoeValue == null || var.aoeValue.length != monsters.size())
+                        var.aoeValue = new int[monsters.size()];
+
+                    for (int i = 0; i < monsters.size(); ++i) {
+                        var.aoeValue[i] = var.calculation.apply(this, monsters.get(i), var.base);
+                    }
+                }
             }
             inCalc = false;
         }
@@ -544,25 +550,20 @@ public abstract class BaseCard extends CustomCard {
             }
             if (isMultiDamage) {
                 ArrayList<AbstractMonster> monsters = AbstractDungeon.getCurrRoom().monsters.monsters;
-                m = getAbstractMonster(m, monsters);
+                for (LocalVarInfo var : cardVariables.values()) {
+                    if (var.aoeValue == null || var.aoeValue.length != monsters.size())
+                        var.aoeValue = new int[monsters.size()];
+
+                    for (int i = 0; i < monsters.size(); ++i) {
+                        m = monsters.get(i);
+                        var.aoeValue[i] = var.calculation.apply(this, m, var.base);
+                    }
+                }
             }
             inCalc = false;
         }
 
         super.calculateCardDamage(m);
-    }
-
-    private AbstractMonster getAbstractMonster(AbstractMonster m, ArrayList<AbstractMonster> monsters) {
-        for (LocalVarInfo var : cardVariables.values()) {
-            if (var.aoeValue == null || var.aoeValue.length != monsters.size())
-                var.aoeValue = new int[monsters.size()];
-
-            for (int i = 0; i < monsters.size(); ++i) {
-                m = monsters.get(i);
-                var.aoeValue[i] = var.calculation.apply(this, m, var.base);
-            }
-        }
-        return m;
     }
 
     @Override
