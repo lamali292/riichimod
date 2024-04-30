@@ -120,7 +120,7 @@ public class TextureLoader {
         {
             texture.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
         }
-        logger.info("Loaded texture " + textureString);
+        logger.info("Loaded texture {}", textureString);
         textures.put(textureString, texture);
     }
 

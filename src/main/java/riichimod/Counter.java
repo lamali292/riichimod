@@ -1,14 +1,12 @@
 package riichimod;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Set;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
 public class  Counter<T> implements Iterable<Integer> {
-    HashMap<T, Integer> map = new HashMap<>();
+    private final HashMap<T, Integer> map = new HashMap<>();
 
     public void inc(T key) {
         map.put(key, map.getOrDefault(key, 0) + 1);
@@ -29,7 +27,6 @@ public class  Counter<T> implements Iterable<Integer> {
     public void clear() {
         map.clear();
     }
-
 
     @Override
     public Iterator<Integer> iterator() {

@@ -122,23 +122,6 @@ public class RiichiCharacter extends CustomPlayer {
         retVal.add(TestCard.ID);
         retVal.add(TestCard.ID);
         retVal.add(TestCard.ID);
-        //retVal.add(PonCard.ID);
-        //retVal.add(ChiiCard.ID);
-        //retVal.add(KanCard.ID);
-        //retVal.add(MoreDrawCard.ID);
-
-        /*
-        retVal.add(StrikeCard.ID);
-        retVal.add(StrikeCard.ID);
-        retVal.add(StrikeCard.ID);
-        retVal.add(StrikeCard.ID);
-        retVal.add(DefendCard.ID);
-        retVal.add(DefendCard.ID);
-        retVal.add(DefendCard.ID);
-        retVal.add(DefendCard.ID);
-        retVal.add(RonCard.ID);
-        retVal.add(DrawCard.ID);
-        */
         return retVal;
     }
 

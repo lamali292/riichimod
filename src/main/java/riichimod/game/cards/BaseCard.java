@@ -342,7 +342,7 @@ public abstract class BaseCard extends CustomCard {
         return var.base;
     }
     public int customVar(String key) {
-        LocalVarInfo var = cardVariables == null ? null : cardVariables.get(key); //Prevents crashing when used with dynamic text
+        LocalVarInfo var = cardVariables.get(key); //Prevents crashing when used with dynamic text
         if (var == null)
             return -1;
         return var.value;
@@ -461,7 +461,7 @@ public abstract class BaseCard extends CustomCard {
             {
                 if (cardStrings.UPGRADE_DESCRIPTION == null)
                 {
-                    RiichiMod.logger.error("Card " + cardID + " upgrades description and has null upgrade description.");
+                    RiichiMod.logger.error("Card {} upgrades description and has null upgrade description.", cardID);
                 }
                 else
                 {
@@ -527,15 +527,7 @@ public abstract class BaseCard extends CustomCard {
             if (isMultiDamage) {
                 ArrayList<AbstractMonster> monsters = AbstractDungeon.getCurrRoom().monsters.monsters;
                 AbstractMonster m;
-                for (LocalVarInfo var : cardVariables.values()) {
-                    if (var.aoeValue == null || var.aoeValue.length != monsters.size())
-                        var.aoeValue = new int[monsters.size()];
-
-                    for (int i = 0; i < monsters.size(); ++i) {
-                        m = monsters.get(i);
-                        var.aoeValue[i] = var.calculation.apply(this, m, var.base);
-                    }
-                }
+                m = getAbstractMonster(m, monsters);
             }
             inCalc = false;
         }
@@ -552,20 +544,25 @@ public abstract class BaseCard extends CustomCard {
             }
             if (isMultiDamage) {
                 ArrayList<AbstractMonster> monsters = AbstractDungeon.getCurrRoom().monsters.monsters;
-                for (LocalVarInfo var : cardVariables.values()) {
-                    if (var.aoeValue == null || var.aoeValue.length != monsters.size())
-                        var.aoeValue = new int[monsters.size()];
-
-                    for (int i = 0; i < monsters.size(); ++i) {
-                        m = monsters.get(i);
-                        var.aoeValue[i] = var.calculation.apply(this, m, var.base);
-                    }
-                }
+                m = getAbstractMonster(m, monsters);
             }
             inCalc = false;
         }
 
         super.calculateCardDamage(m);
+    }
+
+    private AbstractMonster getAbstractMonster(AbstractMonster m, ArrayList<AbstractMonster> monsters) {
+        for (LocalVarInfo var : cardVariables.values()) {
+            if (var.aoeValue == null || var.aoeValue.length != monsters.size())
+                var.aoeValue = new int[monsters.size()];
+
+            for (int i = 0; i < monsters.size(); ++i) {
+                m = monsters.get(i);
+                var.aoeValue[i] = var.calculation.apply(this, m, var.base);
+            }
+        }
+        return m;
     }
 
     @Override

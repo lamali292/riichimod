@@ -46,7 +46,7 @@ public enum MahjongTileKind
 
     public final String abbreviation;
 
-    private MahjongTileKind(String abbreviation)
+    MahjongTileKind(String abbreviation)
     {
         this.abbreviation = abbreviation;
     }
@@ -87,7 +87,7 @@ public enum MahjongTileKind
 
     /**
      * This should be used only for MPSZ notation needs.
-     *
+     * <p>
      * Note that this is different from getTileNumber() as this can yield an number
      * for honours as well.
      */

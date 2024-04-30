@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 public abstract class Hand implements SelectableHolder, Updatable, Renderable {
 
     public Vector2 pos = new Vector2();
-    public int maxHandSize = 13;
+    public final int maxHandSize = 13;
     int selected = 0;
 
     public final List<TileSlot> slots;

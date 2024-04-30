@@ -1,7 +1,7 @@
 package riichimod.game.util;
 
 public class KeywordInfo {
-    public String ID = "";
+    public final String ID = "";
     public String PROPER_NAME;
     public String DESCRIPTION;
     public String[] NAMES;

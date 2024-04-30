@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class MeldHolder implements SelectableHolder, Renderable {
-    public List<MeldSlot> slots;
+    public final List<MeldSlot> slots;
     public int selected = 0;
     public MeldHolder(List<TileGroup> groups, Vector2 pos, BobEffect bob) {
         slots = new ArrayList<>();

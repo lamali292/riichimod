@@ -6,7 +6,7 @@ import riichimod.select.Holdable;
 
 public class Tile implements Comparable<Tile>, Holdable {
 
-    private MahjongTileKind tileKind;
+    private final MahjongTileKind tileKind;
     private boolean red; // red/special tile
 
     public Tile(MahjongTileKind tileKind) {

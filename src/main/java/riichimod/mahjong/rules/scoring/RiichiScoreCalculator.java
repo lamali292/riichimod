@@ -67,7 +67,7 @@ public class RiichiScoreCalculator
 
         if (dealer)
         {
-            baseScore *= 1.5;
+            baseScore = (int) (baseScore * 1.5);
         }
         return roundToUpperHundred(baseScore);
     }
@@ -80,9 +80,8 @@ public class RiichiScoreCalculator
         }
 
         ScoringTier scoringTier = getScoringTier(han);
-        int baseScore = getBaseScore(han, fu, scoringTier);
 
-        return baseScore;
+        return getBaseScore(han, fu, scoringTier);
     }
 
     /**
@@ -122,9 +121,8 @@ public class RiichiScoreCalculator
     private int getYakumanBaseScore(int yakuman)
     {
         ScoringTier scoringTier = getYakumanScoringTier(yakuman);
-        int baseScore = getBaseScore(0, 0, scoringTier);
 
-        return baseScore;
+        return getBaseScore(0, 0, scoringTier);
     }
 
     private int calculateScore(int han, int fu)

@@ -77,9 +77,7 @@ public abstract class BasePotion extends AbstractPotion {
     }
 
     public abstract String getDescription();
-    public void addAdditionalTips() {
-
-    }
+    public abstract void addAdditionalTips();
 
     public Texture getOutlineImg() {
         try {

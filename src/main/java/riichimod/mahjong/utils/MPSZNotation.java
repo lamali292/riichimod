@@ -18,7 +18,7 @@ public class MPSZNotation
 
     public List<TileGroup> getTileGroupsFrom(String... tileTexts)
     {
-        ArrayList<TileGroup> tileGroups = new ArrayList<TileGroup>();
+        ArrayList<TileGroup> tileGroups = new ArrayList<>();
         for (String tileText : tileTexts)
         {
             tileGroups.add(getTileGroupFrom(tileText));
@@ -48,9 +48,8 @@ public class MPSZNotation
     public String getHandAsMPSZNotation(List<Tile> hand)
     {
         StringBuilder mpszStringBuilder = new StringBuilder();
-        hand.stream().map(Tile::getTileKind).sorted(new MahjongTileKindComparator()).forEach(tileKind -> {
-            mpszStringBuilder.append(tileKind.abbreviation);
-        });
+        hand.stream().map(Tile::getTileKind).sorted(new MahjongTileKindComparator()).forEach(tileKind ->
+                mpszStringBuilder.append(tileKind.abbreviation));
 
         String resultString = mpszStringBuilder.toString();
 
@@ -72,7 +71,7 @@ public class MPSZNotation
 
     private List<MahjongTileKind> getTileKindsFrom(String tileText)
     {
-        ArrayList<MahjongTileKind> mahjongTileKinds = new ArrayList<MahjongTileKind>();
+        ArrayList<MahjongTileKind> mahjongTileKinds = new ArrayList<>();
         String remainingText = tileText;
         StringBuilder currentSuitNumbers = new StringBuilder();
 

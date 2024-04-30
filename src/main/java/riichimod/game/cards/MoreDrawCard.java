@@ -1,13 +1,11 @@
 package riichimod.game.cards;
 
-import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import riichimod.game.character.RiichiCharacter;
 import riichimod.game.powers.DrawPower;
 import riichimod.game.util.CardStats;
-import riichimod.mahjong.RiichiCalculator;
 
 public class MoreDrawCard extends BaseCard {
     public static final String ID = makeID(MoreDrawCard.class.getSimpleName());

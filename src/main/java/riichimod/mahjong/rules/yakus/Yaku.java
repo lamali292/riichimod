@@ -2,16 +2,16 @@ package riichimod.mahjong.rules.yakus;
 
 public interface Yaku
 {
-    public boolean isValid();
+    boolean isValid();
 
-    public int getHanValue();
+    int getHanValue();
 
-    public default boolean isYakuman()
+    default boolean isYakuman()
     {
         return getHanValue() == 13;
     }
 
-    public default boolean isDoubleYakuman()
+    default boolean isDoubleYakuman()
     {
         return getHanValue() == 26;
     }

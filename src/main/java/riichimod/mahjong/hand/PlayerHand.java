@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class PlayerHand extends Hand { // called tiles, they are not removed from hand
-    public List<MeldSlot> meldSlots;
+    public final List<MeldSlot> meldSlots;
     private Seat tableWind;
     private Seat seatWind;
 

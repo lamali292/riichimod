@@ -5,7 +5,7 @@ import riichimod.mahjong.rules.yakus.Yaku;
 
 public abstract class TileBasedYaku implements Yaku
 {
-    protected PlayerHand hand;
+    protected final PlayerHand hand;
 
     public TileBasedYaku(PlayerHand hand)
     {

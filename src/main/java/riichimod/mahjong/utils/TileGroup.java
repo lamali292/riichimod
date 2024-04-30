@@ -179,7 +179,7 @@ public class TileGroup implements Holdable
      * This method checks for a protogroup. A protogroup is two tiles that can form
      * a group, for instance 1-2 in wait of a 3, 3-5 in wait of a 4, or 6-7 in wait
      * of a 5 or an 8.
-     *
+     * <p>
      * By definition, a pair is not a protogroup.
      */
     public boolean isProtogroup()
@@ -243,7 +243,7 @@ public class TileGroup implements Holdable
      * Improving tiles are any tiles that improve the current group that is worked
      * on. All waiting tiles are included in that, but for lone tiles, we must also
      * add all tiles that can match up with the current tile to form a protogroup.
-     *
+     * <p>
      * These are not tiles that will make the hand win, but they are part of the
      * ukeire and also contribute to reduce shanten.
      */

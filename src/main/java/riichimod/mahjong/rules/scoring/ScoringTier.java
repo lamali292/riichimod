@@ -12,5 +12,5 @@ public enum ScoringTier
     TRIPLE_YAKUMAN, //
     QUADRUPLE_YAKUMAN, //
     QUINTUPLE_YAKUMAN, //
-    SEXTUPLE_YAKUMAN;
+    SEXTUPLE_YAKUMAN
 }

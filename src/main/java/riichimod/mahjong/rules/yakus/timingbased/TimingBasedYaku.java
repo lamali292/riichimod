@@ -5,7 +5,7 @@ import riichimod.mahjong.rules.yakus.Yaku;
 
 public abstract class TimingBasedYaku implements Yaku
 {
-    protected RiichiScoringParameters parameters;
+    protected final RiichiScoringParameters parameters;
 
     public TimingBasedYaku(RiichiScoringParameters parameters)
     {

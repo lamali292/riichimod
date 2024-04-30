@@ -12,9 +12,9 @@ import java.util.Stack;
 public class RiichiDeck {
     public static Texture front;
     public static Texture back;
-    static Texture sequenceSlot;
-    static Texture meldSlot3;
-    static Texture meldSlot4;
+    public static Texture sequenceSlot;
+    public static Texture meldSlot3;
+    public static Texture meldSlot4;
     public static ArrayList<Tile> tiles;
     public static ArrayList<Texture> textures;
     public static void init() {

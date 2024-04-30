@@ -9,7 +9,7 @@ public class TileGroupUtils
 {
     public static List<TileGroup> tileGroupsOf(String... groups)
     {
-        ArrayList<TileGroup> tileGroupList = new ArrayList<TileGroup>();
+        ArrayList<TileGroup> tileGroupList = new ArrayList<>();
 
         for (String group : groups)
         {
@@ -36,7 +36,7 @@ public class TileGroupUtils
 
     public static List<Tile> getTilesFromTileGroups(List<TileGroup> groups)
     {
-        ArrayList<Tile> tiles = new ArrayList();
+        ArrayList<Tile> tiles = new ArrayList<>();
 
         for (TileGroup group : groups)
         {

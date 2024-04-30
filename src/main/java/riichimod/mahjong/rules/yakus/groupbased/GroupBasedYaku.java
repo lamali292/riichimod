@@ -8,8 +8,8 @@ import java.util.List;
 
 public abstract class GroupBasedYaku implements Yaku
 {
-    protected PlayerHand hand;
-    protected List<TileGroup> groups;
+    protected final PlayerHand hand;
+    protected final List<TileGroup> groups;
 
     public GroupBasedYaku(PlayerHand hand, List<TileGroup> groups)
     {

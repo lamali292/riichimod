@@ -1,8 +1,5 @@
 package riichimod.game.powers;
 
-import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
-import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import riichimod.RiichiHelper;
 import riichimod.game.cards.KanCard;

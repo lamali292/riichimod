@@ -58,7 +58,7 @@ public class RiichiMod implements
 
     public RiichiMod() {
         BaseMod.subscribe(this); //This will make BaseMod trigger all the subscribers at their appropriate times.
-        logger.info(modID + " subscribed to BaseMod.");
+        logger.info("{} subscribed to BaseMod.", modID);
     }
 
     @Override
@@ -147,7 +147,7 @@ public class RiichiMod implements
             }
             catch (Exception e)
             {
-                logger.warn(modID + " does not support " + getLangString() + " keywords.");
+                logger.warn("{} does not support {} keywords.", modID, getLangString());
             }
         }
     }

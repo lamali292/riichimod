@@ -2,31 +2,31 @@ package riichimod.mahjong.rules.scoring;
 
 public interface RiichiScoringParameters
 {
-    public boolean hasPlayerDeclaredRiichi();
+    boolean hasPlayerDeclaredRiichi();
 
-    public boolean isPlayerDealer();
+    boolean isPlayerDealer();
 
-    public boolean doesPlayerWinOnIppatsu();
+    boolean doesPlayerWinOnIppatsu();
 
-    public boolean doesPlayerWinOnTenhou();
+    boolean doesPlayerWinOnTenhou();
 
-    public boolean doesPlayerWinOnChihou();
+    boolean doesPlayerWinOnChihou();
 
-    public boolean doesPlayerWinOnRenhou();
+    boolean doesPlayerWinOnRenhou();
 
-    public boolean doesPlayerWinOnMenzenTsumo();
+    boolean doesPlayerWinOnMenzenTsumo();
 
-    public boolean doesPlayerWinOnRinshanKaihou();
+    boolean doesPlayerWinOnRinshanKaihou();
 
-    public boolean doesPlayerWinOnChankan();
+    boolean doesPlayerWinOnChankan();
 
-    public boolean doesPlayerWinOnHaitei();
+    boolean doesPlayerWinOnHaitei();
 
-    public boolean doesPlayerWinOnHoutei();
+    boolean doesPlayerWinOnHoutei();
 
-    public boolean doesPlayerWinOnNagashiMangan();
+    boolean doesPlayerWinOnNagashiMangan();
 
-    public boolean doesPlayerWinOnRon();
+    boolean doesPlayerWinOnRon();
 
-    public boolean doesPlayerWinOnTsumo();
+    boolean doesPlayerWinOnTsumo();
 }

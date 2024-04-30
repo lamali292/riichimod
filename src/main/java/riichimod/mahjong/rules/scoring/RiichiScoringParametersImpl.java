@@ -18,7 +18,7 @@ public class RiichiScoringParametersImpl implements RiichiScoringParameters
     private boolean winOnRon = false;
     private boolean winOnTsumo = false;
 
-    private Seat winningPlayer;
+    private final Seat winningPlayer;
 
     public RiichiScoringParametersImpl(Seat winningPlayer)
     {

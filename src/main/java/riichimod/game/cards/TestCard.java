@@ -75,14 +75,9 @@ public class TestCard extends BaseCard {
                 }
                 monsterHand.clear();
                 monsterHand.resetSelected();
-                addToTop(new SelectAction(1, RiichiHelper.hand, () -> {
-                    RiichiHelper.hand.discardSelected();
-                }));
+                addToTop(new SelectAction(1, RiichiHelper.hand, () -> RiichiHelper.hand.discardSelected()));
 
             }));
-
-            //monsterHand.resetSelected();
-            //monsterHand.clear();
         }
     }
 
@@ -112,9 +107,7 @@ public class TestCard extends BaseCard {
                     int d = kinds.isNumeral() ? kinds.getTileNumber() : 10;
                     addToTop(new DamageAction(monsterHand.getMonster(), new DamageInfo(AbstractDungeon.player, d, DamageInfo.DamageType.NORMAL), AbstractGameAction.AttackEffect.SLASH_VERTICAL));
                 }
-                addToTop(new SelectAction(1, RiichiHelper.hand, () -> {
-                    RiichiHelper.hand.discardSelected();
-                }));
+                addToTop(new SelectAction(1, RiichiHelper.hand, () -> RiichiHelper.hand.discardSelected()));
             }
         }));
     }

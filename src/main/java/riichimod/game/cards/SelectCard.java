@@ -90,8 +90,6 @@ public class SelectCard extends BaseCard {
         }
         rawDescription = tileGroup.getTileKinds().stream().map(Enum::toString).collect(Collectors.joining(" NL "));
         initializeDescription();
-        //description = tileGroup.getTileKinds().stream().map(Enum::toString).map(t->new DescriptionLine(t,portrait.originalWidth)).collect(Collectors.toCollection(ArrayList::new));
-        //initializeDescription();
     }
 
     @Override
